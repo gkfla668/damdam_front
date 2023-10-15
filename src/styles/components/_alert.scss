@@ -1,0 +1,21 @@
+.react-confirm-alert-overlay {
+	background: rgba(0, 0, 0, 0.7) !important;
+
+	.react-confirm-alert-body {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		background-color: #202123;
+	}
+
+	h1 {
+		@apply text-base md:text-lg text-white font-normal;
+	}
+
+	button {
+		font-size: 16px !important;
+		font-weight: medium;
+		padding: 8px 32px !important;
+		background-color: #000 !important;
+	}
+}

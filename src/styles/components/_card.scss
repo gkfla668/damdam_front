@@ -1,0 +1,5 @@
+@layer base {
+	.card {
+		@apply flex flex-col rounded-lg p-5 bg-[#F6F6FA];
+	}
+}

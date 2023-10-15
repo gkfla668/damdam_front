@@ -1,0 +1,110 @@
+@layer base {
+	.input {
+		@apply w-full px-6 py-[18px] text-base text-main-900 font-normal leading-5 border-none bg-[#F4F6F8] rounded-full;
+		@apply placeholder-[#ADB2BB] focus:ring-0 appearance-none outline-none focus:outline-none;
+
+		&.input-lg {
+			@apply py-4;
+		}
+
+		// &.error {
+		// 	@apply border-red-600;
+		// }
+
+		&:disabled {
+			@apply text-neutral-700;
+		}
+
+		&[type='date']::-webkit-calendar-picker-indicator {
+			color: rgba(0, 0, 0, 0);
+			opacity: 1;
+			display: block;
+			background: url('/icons/icon_calendar2.svg') no-repeat;
+			width: 20px;
+			height: 20px;
+			border-width: thin;
+			cursor: pointer;
+		}
+		&[type='time']::-webkit-calendar-picker-indicator {
+			color: rgba(0, 0, 0, 0);
+			opacity: 1;
+			display: block;
+			background: url('/icons/icon_clock.svg') no-repeat;
+			width: 20px;
+			height: 20px;
+			border-width: thin;
+			cursor: pointer;
+		}
+	}
+
+	.input-textarea {
+		@apply border-0 bg-transparent scroll-hidden;
+		@apply placeholder-[#ADB2BB] focus:ring-0 appearance-none outline-none focus:outline-none;
+	}
+
+	.input-select {
+		@apply p-0 cursor-pointer;
+		* {
+			-ms-overflow-style: none !important; /* IE and Edge */
+			scrollbar-width: none !important; /* Firefox */
+			&::-webkit-scrollbar {
+				display: none !important; /* Chrome, Safari, Opera*/
+			}
+		}
+
+		.select__control {
+			@apply px-4 py-[10px] shadow-none bg-[#F4F6F8] border border-transparent rounded-full cursor-pointer;
+			&--is-focused {
+				@apply border-main-900;
+			}
+
+			&:hover {
+				@apply border border-[#D8DADD];
+			}
+		}
+
+		.select__option {
+			@apply text-main-900 py-4 rounded-[28px] cursor-pointer;
+			
+			&--is-selected {
+				@apply font-bold px-5 bg-[#E7EDFD];
+			}
+
+			&--is-focused {
+				@apply bg-[#EEEEEE];
+			}
+		}
+
+		.select__indicator-separator {
+			@apply hidden;
+		}
+
+		.select__indicator svg path {
+			@apply text-[#464646];
+		}
+
+		.select__single-value {
+			@apply text-base font-normal text-main-900;
+		}
+
+		.select__menu {
+			@apply border border-main-900 rounded-[28px] mt-[6px];
+		}
+
+		.select__input {
+			@apply focus:ring-0 appearance-none outline-none focus:outline-none;
+		}
+	}
+
+	.input-checkbox {
+		@apply w-4 h-4 text-[#434343] bg-[#434343] border border-[#202123] ring-0 focus:ring-0 hover:bg-[#333];
+	}
+
+	.input-radio {
+		@apply w-[18px] h-[18px] text-[#202123] bg-[#202123] border border-[#676767] ring-0 focus:ring-0 hover:bg-[#333];
+		&:checked, &:checked:focus, &:checked:hover, &:checked:focus {
+			@apply border border-[#676767];
+			background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 18 18' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='9' cy='9' r='6.5'/%3e%3c/svg%3e");
+		}
+	}
+}

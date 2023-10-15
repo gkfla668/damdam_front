@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './fonts';
+@import './components/index';
+@import './page/index';
+
+:root {
+	--app-height: 100%;
+	--toastify-color-progress-light: #324478;
+}
+
+.w-webkit {
+	width: -webkit-fill-available;
+}
+.h-webkit {
+	height: -webkit-fill-available;
+}
+.h-screen {
+	height: var(--app-height); // calc(100vh - calc(100vh - 100%))
+}
+
+.text-overflow {
+	@apply whitespace-nowrap text-ellipsis overflow-hidden;
+}
+
+@layer base {
+	* {
+		-webkit-overflow-scrolling: touch;
+		@apply text-base text-black font-sans;
+	}
+
+	.scrollbar-visible-none, .scroll-hidden {
+		-ms-overflow-style: none !important; /* IE and Edge */
+		scrollbar-width: none !important; /* Firefox */
+		&::-webkit-scrollbar {
+			display: none !important; /* Chrome, Safari, Opera*/
+		}
+	}	
+}

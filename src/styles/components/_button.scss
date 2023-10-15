@@ -1,0 +1,56 @@
+@layer base {
+	.btn {
+		@apply w-fit flex items-center justify-center h-[56px] px-6 bg-white border-2 border-point-900 box-border rounded-full;
+		@apply text-base text-point-900 font-extrabold select-none;
+		@apply transition-all ease-in-out duration-150;
+		&:hover {
+			box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.36);
+		}
+		&:active {
+			@apply bg-[#E7EDFD];
+		}
+
+		&.btn-point {
+			background: linear-gradient(180deg, #566390 0%, #324478 100%);
+			@apply text-white border-0;
+			
+			&:hover {
+				background: linear-gradient(180deg, #566390 0%, #324478 100%);
+				box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.36);
+				// @apply border border-black
+			}
+
+			&:active {
+				background: linear-gradient(180deg, #324478 0%, #152750 100%);
+			}
+			* {
+				@apply text-white;
+			}
+		}
+
+		&.btn-block {
+			@apply w-full;
+		}
+		&.btn-md {
+			@apply h-8 text-sm font-medium;
+		}
+		&.btn-sm {
+			@apply h-6 text-xs font-semibold;
+		}
+
+		&.btn-gray {
+			@apply border border-[#D8DADD] text-main-900;
+			&:active {
+				@apply text-white;
+			}
+		}
+
+		&.btn-disabled {
+			@apply bg-[#DDDDDD] text-white cursor-not-allowed;
+		}
+		&.btn-disabled-gradient {
+			background: linear-gradient(180deg, #979797 0%, #5F5F5F 100%);
+			@apply border-0 text-white;
+		}
+	}
+}

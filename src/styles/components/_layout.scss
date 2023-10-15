@@ -1,0 +1,21 @@
+@layer base {
+	.layout-center {
+		@apply flex flex-col justify-center h-screen;
+		margin: 0 auto;
+	}
+
+	#header {
+		height: 100px !important;
+		min-height: 100px !important;
+
+		&.small {
+			height: 56px !important;
+			min-height: 56px !important;
+		}
+
+		@apply w-full flex flex-col justify-center sticky px-4 border-b border-[#E5E8EC];
+		& > div {
+			@apply w-full flex flex-row justify-between items-center;
+		}
+	}
+}

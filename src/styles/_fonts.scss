@@ -1,0 +1,25 @@
+/* styles/fonts.scss */
+@font-face {
+	font-family: 'NanumSquareRoundOTF';
+	font-weight: 300;
+	src: local(''), url('/fonts/NanumSquareRoundOTFL.otf') format('woff2');
+	font-style: normal;
+}
+@font-face {
+	font-family: 'NanumSquareRoundOTF';
+	font-weight: 400;
+	src: local(''), url('/fonts/NanumSquareRoundOTFR.otf') format('woff2');
+	font-style: normal;
+}
+@font-face {
+	font-family: 'NanumSquareRoundOTF';
+	font-weight: 700;
+	src: local(''), url('/fonts/NanumSquareRoundOTFB.otf') format('woff2');
+	font-style: normal;
+}
+@font-face {
+	font-family: 'NanumSquareRoundOTF';
+	font-weight: 800;
+	src: local(''), url('/fonts/NanumSquareRoundOTFEB.otf') format('woff2');
+	font-style: normal;
+}

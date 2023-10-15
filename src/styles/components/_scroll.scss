@@ -1,0 +1,15 @@
+@layer base {
+	.scroll-box {
+		@apply flex flex-row flex-nowrap items-center overflow-x-scroll cursor-grab;
+		
+		&.scroll-y {
+			@apply overflow-y-scroll overflow-x-hidden;
+		}
+		&.snap {
+			@apply snap-x;
+		}
+		& > * {
+			@apply flex-grow-0 flex-shrink-0 snap-start;
+		}
+	}
+}

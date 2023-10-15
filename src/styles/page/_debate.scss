@@ -1,0 +1,47 @@
+@layer base {
+	.debate-card {
+		@apply transition-all ease-in-out duration-150;
+		box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.08);
+		&:hover {
+			box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.25);
+		}
+	}
+
+	.debate-people {
+		@apply w-full border border-[#E5E8EC];
+		border-radius: 16px;
+		border-collapse: separate;
+		border-spacing: 0;
+		overflow: hidden;
+
+		th, td {
+			@apply h-12 border-b border-r border-[#E5E8EC];
+			@apply text-base text-main-900 text-center;
+		}
+
+		th {
+			@apply bg-[#F4F6F8];
+			@apply font-extrabold;
+		}
+
+		tr > th:first-child {
+			width: 120px;
+		}
+		tr > *:last-child {
+			@apply border-r-0;
+		}
+		tr:last-child > * {
+			@apply border-b-0;
+		}
+	}
+
+	.message-box {
+		@apply w-fit bg-white rounded-3xl px-8 py-4;
+		&.message-point {
+			background: linear-gradient(180deg, #526394 0%, #2D457C 100%);
+			* {
+				@apply text-white;
+			}
+		}
+	}
+}
