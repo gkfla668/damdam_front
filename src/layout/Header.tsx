@@ -4,7 +4,7 @@ import { useContext, useState } from 'react'
 import Link from 'next/link'
 import Modal from 'react-modal'
 //-assets
-import LogoSVG from 'public/app/logo.svg'
+import LogoSVG from 'public/app/full_logo.svg'
 import CharSVG from 'public/icons/btn_profile_pc.svg'
 import MenuSVG from 'public/icons/btn_menu_m.svg'
 import CloseSVG from 'public/icons/btn_exit_black.svg'
@@ -42,7 +42,7 @@ export default function Header() {
 
 				<div className='flex flex-row justify-end w-40'>
 					{isMobile && <MenuSVG width={24} height={24} onClick={() => setModal(true)} />}
-					{!isMobile && <CharSVG width={36} height={36} />}
+					<Link href={'/login'}> {!isMobile && <CharSVG width={36} height={36} />}</Link>
 				</div>
 			</div>
 
