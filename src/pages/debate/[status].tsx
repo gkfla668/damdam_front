@@ -84,9 +84,9 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 
 	//-Components
 	const NoResult = () => (
-		<div className='w-full my-4 flex flex-col items-center gap-6'>
+		<div className='flex flex-col items-center w-full gap-6 mt-8 mb-20'>
 			<NoResultSVG width={100} height={100} />
-			<span className='text-base text-main-900 font-normal text-center'>
+			<span className='text-base font-normal text-center text-main-900'>
 				토론이 없습니다.
 				<br />
 				지금 바로 토론을 개설해보세요.
@@ -94,7 +94,7 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 		</div>
 	)
 
-	const Dasbharod = () => {
+	const Dashboard = () => {
 		const isEmpty =
 			Object.values(dashboard || {})
 				.map((obj) => obj.length)
@@ -111,7 +111,7 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 				{wait?.length ? (
 					<>
 						<div className='flex flex-row items-center justify-between mb-5'>
-							<span className='text-xl text-main-900 font-extrabold'>토론자 모집 중</span>
+							<span className='text-xl font-extrabold text-main-900'>토론자 모집 중</span>
 							<Link href={`/debate/${menu_list[1].value}`}>
 								<div className='flex flex-row items-center gap-[2px]'>
 									<span className='text-[13px] leading-4 text-main-900 font-normal'>더보기</span>
@@ -120,7 +120,7 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 							</Link>
 						</div>
 
-						<div className='flex flex-row flex-wrap mb-10 gap-10'>
+						<div className='flex flex-row flex-wrap gap-10 mb-10'>
 							{wait?.map((obj) => (
 								<DebateItemCard key={obj.id} column={device !== 'desktop' ? 1 : 3} data={obj} onClick={() => goDebateDetailPage(obj.id)} />
 							))}
@@ -131,7 +131,7 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 				{ing?.length ? (
 					<>
 						<div className='flex flex-row items-center justify-between mb-5'>
-							<span className='text-xl text-main-900 font-extrabold'>실시간 토론 중</span>
+							<span className='text-xl font-extrabold text-main-900'>실시간 토론 중</span>
 							<Link href={`/debate/${menu_list[2].value}`}>
 								<div className='flex flex-row items-center gap-[2px]'>
 									<span className='text-[13px] leading-4 text-main-900 font-normal'>더보기</span>
@@ -140,7 +140,7 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 							</Link>
 						</div>
 
-						<div className='flex flex-row flex-wrap mb-10 gap-10'>
+						<div className='flex flex-row flex-wrap gap-10 mb-10'>
 							{ing?.map((obj) => (
 								<DebateItemCard key={obj.id} column={device !== 'desktop' ? 1 : 3} data={obj} onClick={() => goDebateDetailPage(obj.id)} />
 							))}
@@ -151,7 +151,7 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 				{end?.length ? (
 					<>
 						<div className='flex flex-row items-center justify-between mb-5'>
-							<span className='text-xl text-main-900 font-extrabold'>토론자 모집 완료</span>
+							<span className='text-xl font-extrabold text-main-900'>토론자 모집 완료</span>
 							<Link href={`/debate/${menu_list[3].value}`}>
 								<div className='flex flex-row items-center gap-[2px]'>
 									<span className='text-[13px] leading-4 text-main-900 font-normal'>더보기</span>
@@ -160,7 +160,7 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 							</Link>
 						</div>
 
-						<div className='flex flex-row flex-wrap mb-10 gap-10'>
+						<div className='flex flex-row flex-wrap gap-10 mb-10'>
 							{end?.map((obj) => (
 								<DebateItemCard key={obj.id} column={device !== 'desktop' ? 1 : 3} data={obj} onClick={() => goDebateDetailPage(obj.id)} />
 							))}
@@ -184,17 +184,17 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 
 	return (
 		<Layout>
-			<div className='container mx-auto mt-12 md:mt-24 pb:12'>
-				<div className='flex flex-col items-center mb-20'>
-					<span className='text-3xl md:text-5xl text-main-900 font-extrabold mb-2'>토론</span>
-					<span className='text-sm md:text-base text-main-900 font-normal'>사람들과 다양한 주제로 토론해보세요.</span>
+			<div className='container mx-auto mt-12 md:mt-13 md:mb-13 pb:12'>
+				<div className='flex flex-col items-center mb-16'>
+					<span className='mb-2 text-3xl font-extrabold md:text-[32px] text-main-900'>토론</span>
+					<span className='text-sm font-normal md:text-[16px] text-main-900'>사람들과 다양한 주제로 토론해보세요.</span>
 				</div>
 
 				<div className='flex flex-col'>
-					<MenuTab active={status} onClick={(val) => router.push(`/debate/${val}`)} list={menu_list} className='mb-12' />
+					<MenuTab active={status} onClick={(val) => router.push(`/debate/${val}`)} list={menu_list} className='mb-8' />
 
-					<div className='flex flex-col md:flex-row gap-3 justify-between flex-wrap mb-12'>
-						<div className='grow flex flex-row items-center'>
+					<div className='flex flex-col flex-wrap justify-between gap-3 mb-12 md:flex-row'>
+						<div className='flex flex-row items-center grow'>
 							<TextInput
 								type='select'
 								placeholder='전체'
@@ -220,7 +220,7 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 
 							{loggedIn && <CheckBox text='내 토론만 보기' check={my} setCheck={(val) => setMy(val)} />}
 						</div>
-						<div className='grow flex flex-col md:flex-row justify-end items-center gap-3'>
+						<div className='flex flex-col items-center justify-end gap-3 grow md:flex-row'>
 							<TextInput
 								type='text'
 								placeholder='검색어를 검색하세요.'
@@ -231,13 +231,13 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 								boxClass='w-full md:w-[320px]'
 							/>
 
-							<button className='btn w-full md:w-fit' onClick={goAddPage}>
+							<button className='w-full btn md:w-fit' onClick={goAddPage}>
 								토론 개설하기
 							</button>
 						</div>
 					</div>
 
-					{isAll ? <Dasbharod /> : <Search />}
+					{isAll ? <Dashboard /> : <Search />}
 				</div>
 			</div>
 		</Layout>
