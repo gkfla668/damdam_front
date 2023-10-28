@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Item = styled.li`
-	padding: 16px 48px;
+	padding: 16px 32px;
 	font-weight: 900;
 	text-align: center;
 

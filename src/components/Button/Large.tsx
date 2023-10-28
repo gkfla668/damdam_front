@@ -1,11 +1,10 @@
 import styled from 'styled-components'
 
-export const ButtonStyle = styled.button`
-	padding: 16px 0;
-	width: 464px;
+export const ButtonStyle = styled.button<{ width: string }>`
+	padding: 13px 0;
+	width: ${(props) => props.width}px;
 
 	color: white;
-	font-size: 18px;
 	font-weight: 800;
 	line-height: 30px;
 	text-align: center;
@@ -22,8 +21,8 @@ export const ButtonStyle = styled.button`
 		box-shadow: none;
 	}
 `
-const LargeButton = ({ text }: { text: string }) => {
-	return <ButtonStyle>{text}</ButtonStyle>
+const LargeButton = ({ text, width }: { text: string; width?: string }) => {
+	return <ButtonStyle width={width || '464'}>{text}</ButtonStyle>
 }
 
 export default LargeButton
