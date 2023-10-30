@@ -16,4 +16,10 @@ export const FindButton = styled.button`
 	letter-spacing: -1px;
 
 	color: #383b40;
+
+	&:hover {
+		background-color: #e7edfd;
+		font-weight: 900;
+		color: #324478;
+	}
 `
