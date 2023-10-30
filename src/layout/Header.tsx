@@ -1,6 +1,6 @@
 import { LayoutContext } from 'context/Layout'
 import { useContext, useState } from 'react'
-
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Modal from 'react-modal'
 //-assets
@@ -16,6 +16,9 @@ export default function Header() {
 
 	const isMobile = device === 'mobile'
 
+	const router = useRouter()
+	const curPath = router.pathname
+
 	return (
 		<div id='header' className={isMobile ? 'small' : ''}>
 			<div className='w-full mx-auto lg:container'>
@@ -26,16 +29,32 @@ export default function Header() {
 				</div>
 				{!isMobile && (
 					<div className='flex flex-row items-start gap-24'>
-						<Link href='/study'>
+						<Link href='/study' className='relative'>
 							<span className='text-xl font-extrabold text-main-900 whitespace-nowrap'>학습</span>
+							{curPath.includes('/study') && (
+								<>
+									<div className='w-full border-b-[3px] border-point-900 rounded-full' />
+									<NavPointSVG width={10} height={9} className='absolute top-0 -right-3' />
+								</>
+							)}
 						</Link>
-						<Link href='/topic'>
+						<Link href='/topic' className='relative'>
 							<span className='text-xl font-extrabold text-main-900 whitespace-nowrap'>토픽</span>
+							{curPath.includes('/topic') && (
+								<>
+									<div className='w-full border-b-[3px] border-point-900 rounded-full' />
+									<NavPointSVG width={10} height={9} className='absolute top-0 -right-3' />
+								</>
+							)}
 						</Link>
 						<Link href='/debate' className='relative'>
 							<span className='text-xl font-extrabold text-point-900 whitespace-nowrap'>토론</span>
-							<div className='w-full border-b-[3px] border-point-900 rounded-full' />
-							<NavPointSVG width={10} height={9} className='absolute top-0 -right-2' />
+							{curPath.includes('/debate') && (
+								<>
+									<div className='w-full border-b-[3px] border-point-900 rounded-full' />
+									<NavPointSVG width={10} height={9} className='absolute top-0 -right-3' />
+								</>
+							)}
 						</Link>
 					</div>
 				)}
