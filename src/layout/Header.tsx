@@ -10,6 +10,9 @@ import MenuSVG from 'public/icons/btn_menu_m.svg'
 import CloseSVG from 'public/icons/btn_exit_black.svg'
 import NavPointSVG from 'public/icons/gnb_point.svg'
 
+import styled from 'styled-components'
+import { useAuth } from 'utils/hooks/useAuth'
+
 export default function Header() {
 	const { device } = useContext(LayoutContext)
 	const [modal, setModal] = useState<boolean>(false)
@@ -18,6 +21,9 @@ export default function Header() {
 
 	const router = useRouter()
 	const curPath = router.pathname
+
+	const { user } = useAuth()
+	const loggedIn = user?.id
 
 	return (
 		<div id='header' className={isMobile ? 'small' : ''}>
@@ -30,28 +36,28 @@ export default function Header() {
 				{!isMobile && (
 					<div className='flex flex-row items-start gap-24'>
 						<Link href='/study' className='relative'>
-							<span className='text-xl font-extrabold text-main-900 whitespace-nowrap'>학습</span>
+							<MenuItem>학습</MenuItem>
 							{curPath.includes('/study') && (
 								<>
-									<div className='w-full border-b-[3px] border-point-900 rounded-full' />
+									<div className='w-full border-b-[3px] border-blue rounded-full' />
 									<NavPointSVG width={10} height={9} className='absolute top-0 -right-3' />
 								</>
 							)}
 						</Link>
 						<Link href='/topic' className='relative'>
-							<span className='text-xl font-extrabold text-main-900 whitespace-nowrap'>토픽</span>
+							<MenuItem>토픽</MenuItem>
 							{curPath.includes('/topic') && (
 								<>
-									<div className='w-full border-b-[3px] border-point-900 rounded-full' />
+									<div className='w-full border-b-[3px] border-blue rounded-full' />
 									<NavPointSVG width={10} height={9} className='absolute top-0 -right-3' />
 								</>
 							)}
 						</Link>
 						<Link href='/debate' className='relative'>
-							<span className='text-xl font-extrabold text-point-900 whitespace-nowrap'>토론</span>
+							<MenuItem>토론</MenuItem>
 							{curPath.includes('/debate') && (
 								<>
-									<div className='w-full border-b-[3px] border-point-900 rounded-full' />
+									<div className='w-full border-b-[3px] border-blue rounded-full' />
 									<NavPointSVG width={10} height={9} className='absolute top-0 -right-3' />
 								</>
 							)}
@@ -87,6 +93,9 @@ export default function Header() {
 					</div>
 
 					<div className='flex flex-col grow'>
+						<Link href='/'>
+							<span className='block w-full py-4 text-base font-extrabold text-main-900'>홈</span>
+						</Link>
 						<Link href='/study'>
 							<span className='block w-full py-4 text-base font-extrabold text-main-900'>학습</span>
 						</Link>
@@ -96,9 +105,25 @@ export default function Header() {
 						<Link href='/debate'>
 							<span className='block w-full py-4 text-base font-extrabold text-main-900'>토론</span>
 						</Link>
+						{!loggedIn ? (
+							<Link href='/login'>
+								<span className='block w-full py-4 text-base font-extrabold text-main-900'>로그인</span>
+							</Link>
+						) : (
+							<Link href='/debate'>
+								<span className='block w-full py-4 text-base font-extrabold text-main-900'>마이</span>
+							</Link>
+						)}
 					</div>
 				</div>
 			</Modal>
 		</div>
 	)
 }
+
+const MenuItem = styled.span`
+	font-size: 20px;
+	font-weight: 900;
+	color: #383b40;
+	white-space: nowrap;
+`
