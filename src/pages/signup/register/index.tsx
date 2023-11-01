@@ -23,7 +23,7 @@ const Register = () => {
 		setId(userInput)
 
 		/** 아이디 유효성 검사 */
-		if (id.length >= 1 && !idRegex.test(userInput)) return setIdCheckMsg('* 5~20자의 영문 소문자, 숫자를 조합하여 입력해 주세요.')
+		if (userInput.length !== 0 && !idRegex.test(userInput)) return setIdCheckMsg('* 5~20자의 영문 소문자, 숫자를 조합하여 입력해 주세요.')
 		return setIdCheckMsg('')
 	}
 
@@ -33,18 +33,20 @@ const Register = () => {
 		setPwd(userInput)
 
 		/** 비밀번호 유효성 검사 */
-		if (pwd.length >= 1 && !passwordRegex.test(userInput))
+		if (userInput.length !== 0 && !passwordRegex.test(userInput))
 			return setPwdCheckMsg('* 8~16자의 영문 대/소문자, 숫자, 특수문자를 조합하여 입력해 주세요.')
 		return setPwdCheckMsg('')
 	}
 
 	/** 비밀번호 확인 */
 	const onChangePwdConfirm = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const curPwd = e.target.value
-		setConfirmPwd(curPwd)
+		const userInput = e.target.value
+		setConfirmPwd(userInput)
 
-		if (pwd.length < 8) return setPwdConfirmMsg('* 비밀번호를 먼저 입력해 주세요.')
-		if (curPwd.length >= 1 && pwd !== curPwd) return setPwdConfirmMsg('* 비밀번호가 다릅니다.')
+		if (userInput.length !== 0) {
+			if (pwd.length < 8) return setPwdConfirmMsg('* 비밀번호를 먼저 입력해 주세요.')
+			if (curPwd.length !== 0 && pwd !== userInput) return setPwdConfirmMsg('* 비밀번호가 다릅니다.')
+		}
 		return setPwdConfirmMsg('')
 	}
 
@@ -54,8 +56,8 @@ const Register = () => {
 		setName(userInput)
 
 		/** 이름 유효성 검사*/
-		if (!nameRegex.test(userInput)) return setNameCheckMsg('* 숫자 8자리를 입력해주세요.')
-		return setDateOfBirthCheckMsg('')
+		if (userInput.length !== 0 && !nameRegex.test(userInput)) return setNameCheckMsg('* 올바른 이름 형식으로 입력해 주세요.')
+		return setNameCheckMsg('')
 	}
 
 	const dateOfBirthRegex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/
@@ -64,15 +66,19 @@ const Register = () => {
 		setDateOfBirth(userInput)
 
 		/** 생년월일 유효성 검사 */
-		if (!dateOfBirthRegex.test(userInput)) return setDateOfBirthCheckMsg('* 숫자 8자리를 입력해주세요.')
+		if (userInput.length !== 0 && !dateOfBirthRegex.test(userInput)) return setDateOfBirthCheckMsg('* 숫자 8자리를 입력해주세요.')
 		return setDateOfBirthCheckMsg('')
+	}
+
+	const onSubmit = () => {
+		// 백엔드 통신 코드
 	}
 
 	return (
 		<Layout>
 			<div className='flex flex-col items-center justify-center w-full'>
 				<div className='text-[28px] font-extrabold mb-10 mt-[100px]'>회원가입</div>
-				<form action='#' id='signupForm'>
+				<form action='#' id='signupForm' onSubmit={onSubmit}>
 					<div>
 						<S.InputWrapper>
 							<S.InputLabel>아이디</S.InputLabel>
@@ -122,6 +128,7 @@ const Register = () => {
 								minLength={2}
 								maxLength={5}
 							/>
+							<S.MessageText>{nameCheckMsg}</S.MessageText>
 						</S.InputWrapper>
 						<S.InputWrapper>
 							<S.InputLabel>생년월일 8자리</S.InputLabel>
