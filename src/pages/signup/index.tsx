@@ -7,35 +7,6 @@ import DroptopSVG from 'public/icons/btn_arrow_top.svg'
 
 import LargeButton from 'components/Button/Large'
 
-const Title = styled.h1`
-	font-weight: 900;
-`
-
-const Text = styled.span`
-	color: #383b40;
-`
-
-const TH = styled.th`
-	font-weight: 900;
-	padding: 0px 8px;
-	white-space: nowrap;
-
-	border-right: 1px solid black;
-	width: 25%;
-
-	background-color: #e5e8ec;
-`
-
-const Td = styled.td`
-	font-size: 14px;
-	border-right: 1px solid black;
-	padding: 9px 12px;
-`
-
-const TdItem = styled.li`
-	font-size: 14px;
-`
-
 const Signup = () => {
 	const [checkItems, setCheckItems] = useState<Array<string>>([])
 	const [, setIsAllChecked] = useState(false)
@@ -78,31 +49,25 @@ const Signup = () => {
 					<form action='/signup/register' id='signupForm' className='flex flex-col items-start w-full'>
 						{/** 전체동의 체크박스 */}
 						<div className=' w-full flex items-center gap-2 py-4 border-y-[1px] border-y-[#e5e8ec]'>
-							<input
-								type='checkbox'
-								checked={checkItems.length >= 2}
-								onChange={(e) => handleAllCheck(e.target.checked)}
-								className='cursor-pointer'
-							/>
-							<label className='font-extrabold cursor-pointer'>전체동의</label>
+							<Input id='all' type='checkbox' checked={checkItems.length >= 2} onChange={(e) => handleAllCheck(e.target.checked)} />
+							<Label htmlFor='all'>전체동의</Label>
 						</div>
 						<div className='flex flex-col w-full gap-6 pt-6'>
 							{/** 담담 서비스 이용약관 체크박스 */}
 							<div>
 								<div className='flex justify-between'>
 									<div className='flex items-center gap-2'>
-										<input
+										<Input
 											required
 											id='first'
 											type='checkbox'
 											checked={checkItems.includes('first')}
 											onChange={(e) => handleSingleCheck(e.target.checked, e.target.id)}
-											className='cursor-pointer'
 										/>
-										<label htmlFor='first' className='flex gap-1'>
-											<span className='text-[#ED7743] font-extrabold'>(필수)</span>
+										<Label htmlFor='first'>
+											<span className='font-extrabold text-orange'>(필수)</span>
 											<Text>담담 서비스 이용약관</Text>
-										</label>
+										</Label>
 									</div>
 									<div className='cursor-pointer'>
 										{!firstClick ? (
@@ -114,21 +79,21 @@ const Signup = () => {
 								</div>
 								{firstClick ? (
 									<div className='w-full p-6 mt-6 bg-[#f4f6f8] rounded-[16px]'>
-										<p>
+										<P>
 											<Title>제1조 (목적) </Title> 본 약관은 담담 서비스의 이용과 관련하여 당사와 서비스 이용자(이하 '회원')간에 권리·의무
 											및 기타 필요한 사항을 규정함을 목적으로 합니다.
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>제2조 (용어의 정의)</Title> 본 약관에서 사용하는 용어의 정의는 다음과 같고 정의된 용어의 정의 외에는 관계법령
 											및 기타 일반적인 상례와 관례에 의합니다. <br />
 											1. 회원: 서비스에 접속하여 서비스를 이용하는 모든 고객을 말합니다. <br />
 											2. 아이디(ID): 회원의 식별과 서비스 이용을 위하여 회원이 정하고 당사가 승인하는 문자와 숫자의 조합을 말합니다. <br />
 											3. 회원정보: 당사가 서비스 이용을 제공하기 위해 수집한 회원의 이름, 생년월일 등 회원의 개인정보를 말합니다. <br />
 											4. 게시물: 당사가 제공하는 서비스(이하 '토픽', '토론' 서비스)에 회원이 게시한 부호, 문자, URL 링크 등을 의미합니다.
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>제3조 (약관의 효력과 개정)</Title>
 											1. 본 약관은 서비스에 게시하거나 기타의 방법으로 회원에게 공지함으로써 효력이 발생합니다. <br />
 											2. 당사는 약관의 규제에 관한 법률 등의 관계법령에 위배되지 않는 범위 내에서 이 약관을 개정할 수 있습니다. <br />
@@ -139,14 +104,14 @@ const Signup = () => {
 											<br />
 											5. 회원은 개정 약관에 동의하지 않는 경우 서비스 이용을 중단하고 이용계약을 해지할 수 있습니다. <br />
 											6. 이 약관은 서비스를 이용하고자 하는 모든 회원에 대하여 그 효력을 발생합니다.
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>제4조 (약관 외 준칙) </Title> 본 약관에 명시되지 않은 사항에 대해서는 관계법령 및 서비스를 이용하면서 고지되는
 											세부이용지침 등의 규정에 따릅니다.
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>제5조 이용계약 체결</Title>
 											1. 이용계약은 회원이 되고자 하는 고객(이하 '회원가입 신청자')이 약관의 내용에 동의한 후 당사가 정한 신청약식에 따라
 											서비스 이용을 신청하고 당사가 이를 승낙함으로써 성립합니다.
@@ -158,17 +123,17 @@ const Signup = () => {
 											3. 당사는 서비스관련 설비가 부족하거나, 기술상 또는 업무상 문제가 있는 경우에는 승낙을 유보할 수 있습니다. <br />
 											4. 당사는 서비스 이용에 필요한 회원 정보 및 기타 정보 항목을 추가하거나 변경할 수 있습니다. <br />
 											5. 회원은 서비스내의 회원탈퇴 메뉴를 통해 직접 회원탈퇴를 할 수 있습니다.
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>제6조 회원정보의 변경</Title>
 											1. 회원은 서비스내 마이 메뉴를 통해서 본인의 개인정보를 열람할 수 있으며 이름, 아이디를 제외한 개인정보는 수정할 수
 											있습니다. <br />
 											2. 회원은 개인정보가 변경되거나 잘못된 정보를 입력하였을 경우 지체없이 수정해야 하며, 수정하지 않음으로 인해 발생하는
 											모든 불이익에 대해서는 당사가 책임지지 않습니다.
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>제7조 서비스의 이용</Title>
 											1. 당사는 회원에게 아래와 같은 서비스를 제공합니다. - 담담: 다양한 주제에 관해 AI 담비와 학습하고, 회원과 의견을
 											나누고 토론할 수 있는 서비스 <br />
@@ -180,9 +145,9 @@ const Signup = () => {
 											5. 당사는 당사가 정한 서비스 정책에 따라 회원별 이용시간, 이용횟수, 서비스 메뉴 등을 세분화하여 이용에 차등을 둘 수
 											있습니다. <br />
 											6. 당사는 서비스 장애 발견시 적극 서비스 개선에 노력합니다.
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>제8조 서비스 이용중지 또는 계약해지 </Title>
 											1. 당사는 다음 각호에 해당하는 회원에 대하여는 별도의 공지나 통보없이 회원의 서비스 이용을 중지하거나 계약을 해지할 수
 											있습니다. - 회원 신청 또는 개인정보 변경시 타인의 정보를 도용하거나 허위 내용을 등록한 경우 - 당사가 서비스내 공지한
@@ -202,9 +167,9 @@ const Signup = () => {
 											경우 - 기타 불가항력적인 사유로 인하여 서비스 제공이 불가능한 경우 <br />
 											6. 당사는 전항규정에 의하여 서비스의 이용을 제한하거나 정지한 때에는 그 사유 및 제한기간 등을 지체 없이 이용회원에게
 											알려야 합니다.
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>제9조 베타서비스의 제공</Title>
 											1. 당사는 서비스를 상용화하기 전, 이용자를 대상으로 테스트 목적의 베타서비스를 일정한 기간 동안 제공할 수 있습니다.
 											베타서비스를 시작하는 경우 당사는 대상자들에게 베타 서비스의 내용, 제공 기간 등을 공지합니다. <br />
@@ -212,14 +177,14 @@ const Signup = () => {
 											당사는 베타서비스를 제공하는 도중 예상치 못한 손해나 문제가 발생하였을 경우에 회원에게 사전 공지 없이 베타 서비스를
 											종료할 수 있습니다. <br />
 											3. 베타서비스로 인하여 이용자에게 손해가 발생한 경우, 회사는 이에 대한 책임을 부담하지 않습니다.
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>제10조 개인정보보호 의무 </Title>당사는 '정보통신망법' 등 관계 법령이 정하는 바에 따라 회원의 개인정보를
 											보호하기 위해 노력합니다. 개인정보의 보호 및 사용에 대해서는 관련법 및 당사의 "개인정보 처리방침"이 적용됩니다.
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>제11조 게시물의 관리</Title>
 											1. 당사는 회원의 게시물이 당사에서 공지한 게시물 운영정책 및 '정보통신망법', '저작권법' 등 관렵법에 위반되는 내용을
 											포함하는 경우, 회원의 동의 없이 해당 게시물의 비노출 및 삭제 처리를 할 수 있습니다. <br />
@@ -230,9 +195,9 @@ const Signup = () => {
 											연발한 게시물 <br />- 정치적, 이념적 편향성이 강하거나 특정 집단 및 인물을 비난 또는 홍보하는 게시물 <br />- 당사의
 											운영진을 사칭하는 게시물 <br />- 서비스의 정상적인 운영을 방해하는 게시물 <br />- 기타 건전한 상식에 의거하여 게시가
 											부적합하다고 판단되는 게시물
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>제12조 게시물의 저작권</Title>
 											1. 회원이 서비스내에 게시한 게시물의 저작권을 해당 게시물의 저작자에게 귀속됩니다. <br />
 											2. 회원은 자신이 서비스내에 게시한 게시물을 당사가 다음 각 호의 목적으로 사용하는 것을 허락합니다. <br />- 당사의
@@ -244,9 +209,9 @@ const Signup = () => {
 											당사가 검색결과로 사용하는 것을 허락한 것으로 간주합니다. <br />
 											5. 회원이 이용계약을 해지 시에는 회원이 서비스에 게시한 게시물은 삭제됩니다. 다만, 다른 회원에 의해 신고를 받은
 											게시물은 서비스에서는 삭제되지만 필요에 따라 당사가 1년 동안 보관할 수 있습니다.
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>제13조 당사의 의무</Title>
 											1. 당사는 본 약관 및 관련법을 준수하고, 안정적으로 서비스를 제공하기 위해 최선을 다합니다. <br />
 											2. 당사는 회원의 개인정보를 본인의 동의없이 제3자에게 제공하지 않습니다. <br />
@@ -255,9 +220,9 @@ const Signup = () => {
 											4. 당사는 서비스 이용이나 운영과 관련된 회원의 불만사항을 접수하는 경우, 이를 지체없이 처리하여 접수일로부터 10일
 											이내에 그 결과를 이메일, 전화 등의 방법으로 통지합니다. 다만, 불만사항 내용 확인 및 경위 파악, 접수 내용 처리 등에
 											상당한 시간이 소요될 경우, 회사는 그 사유와 처리 일정을 회원에게 미리 통지합니다.
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>제14조 회원의 의무</Title>
 											1. 회원은 회원 가입 및 서비스 이용 시 필요한 정보를 정확하게 입력·제공하여야 하며, 제공한 정보의 내용 변경이 발생한
 											경우, 서비스에 변경된 정보를 입력하거나 회사에 알리는 방식으로 변경된 내용의 정보를 제공하여야 합니다. <br />
@@ -278,14 +243,14 @@ const Signup = () => {
 											기타 권리침해, 불이익, 손해, 불쾌감을 주는 정보가 포함되어 있지 않음을 반드시 확인해야합니다. AI 결과값과 관련하여
 											법적∙윤리적 문제가 발생하거나, 제3자와 일체의 분쟁이 발생하는 경우 이에 대한 모든 책임은 회원에게 있습니다. 8. 회원이
 											AI 결과값을 외부에 공개하는 과정에서 당사에 피해를 입힌 경우 그에 대한 법률상 책임을 부담합니다.
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>제15조 권리의 귀속</Title>
 											서비스에 대한 저작권 및 지적재산권을 당사에 귀속됩니다. 단, 회원의 게시물은 제외합니다.
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>제16조 면책 및 손해배상</Title>
 											1. 회원이 본 약관을 위반하여 당사에 손해가 발생하게 되는 경우, 본 약관을 위반한 회원은 당사에 발생한 모든 손해를
 											배상해야 합니다. <br />
@@ -304,16 +269,16 @@ const Signup = () => {
 											통하여 얻은 결과물로 인한 손해에 관하여 책임을 지지 않습니다. <br />
 											9. AI 결과값의 이용과 관련하여 발생하는 모든 문제에 대한 책임은 회원에게 있으며, 회사는 이에 대하여 일체의 책임을 지지
 											아니합니다.
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>제17조 (관할 법원) </Title>
 											서비스 이용으로 발생한 당사와 회원 간의 재판의 관할은 민사소송법상의 관할권이 인정되는 법원으로 합니다.
-										</p>
+										</P>
 										<br />
-										<p>
+										<P>
 											<Title>&lt;부 칙&gt;</Title> 본 약관은 2023년 10월 31일부터 적용됩니다.
-										</p>
+										</P>
 									</div>
 								) : (
 									''
@@ -323,18 +288,17 @@ const Signup = () => {
 							<div className='border-b-[1px] border-b-[#e5e8ec]'>
 								<div className='flex justify-between'>
 									<div className='flex items-center gap-2 pb-6'>
-										<input
+										<Input
 											required
 											id='second'
 											type='checkbox'
 											checked={checkItems.includes('second')}
 											onChange={(e) => handleSingleCheck(e.target.checked, e.target.id)}
-											className='cursor-pointer'
 										/>
-										<label htmlFor='second' className='flex gap-1 cursor-pointer'>
-											<span className='text-[#ED7743] font-extrabold'>(필수)</span>
+										<Label htmlFor='second'>
+											<span className='font-extrabold text-orange'>(필수)</span>
 											<Text>개인정보 수집 및 이용 동의서</Text>
-										</label>
+										</Label>
 									</div>
 									<div className='cursor-pointer'>
 										{!secondClick ? (
@@ -346,10 +310,10 @@ const Signup = () => {
 								</div>
 								{secondClick ? (
 									<div className='bg-[#F4F6F8] p-6 rounded-[16px]'>
-										<p className='text-[#383B40]'>
+										<P>
 											당사는 "개인정보 보호법"에 따라 아래와 같이 수집하는 개인정보의 항목, 수집 및 이용 목적, 보유 및 이용 기간을
 											안내드리고 동의를 받고자 합니다.
-										</p>
+										</P>
 										<br />
 										<table>
 											<thead className='border-y-[1px] border-y-black'>
@@ -439,12 +403,12 @@ const Signup = () => {
 											</tbody>
 										</table>
 										<br />
-										<p className='text-[#383B40]'>
+										<P>
 											정보주체는 위와 같이 개인정보를 처리하는 것에 대한 동의를 거부할 권리가 있습니다. <br />
 											그러나 동의를 거부할 경우 [로그인이 필요한 담담 서비스 이용]이 제한될 수 있습니다. <br />
 											<br />
 											이에 본인은 당사가 위와 같이 개인정보를 수집 및 이용하는데 동의합니다.
-										</p>
+										</P>
 									</div>
 								) : (
 									''
@@ -452,7 +416,7 @@ const Signup = () => {
 							</div>
 						</div>
 						<div className='w-full mt-6'>
-							<Text>* 필수항목 거부시에는 회원가입이 제한됩니다.</Text>
+							<Text className='text-[14px]'>* 필수항목 거부시에는 회원가입이 제한됩니다.</Text>
 						</div>
 						<div className='mt-[100px] mb-[16px] text-[#666666]'>
 							<LargeButton text={'다음'} width={'840'} />
@@ -465,3 +429,61 @@ const Signup = () => {
 }
 
 export default Signup
+
+const P = styled.p`
+	color: #383b40;
+`
+
+const Title = styled.h1`
+	color: #383b40;
+	font-weight: 900;
+`
+
+const Text = styled.span`
+	color: #383b40;
+	font-weight: 500;
+`
+
+const TH = styled.th`
+	font-weight: 900;
+	padding: 0px 8px;
+	white-space: nowrap;
+
+	border-right: 1px solid black;
+	width: 25%;
+
+	background-color: #e5e8ec;
+`
+
+const Td = styled.td`
+	font-size: 14px;
+	border-right: 1px solid black;
+	padding: 9px 12px;
+`
+
+const TdItem = styled.li`
+	font-size: 14px;
+`
+
+const Label = styled.label`
+	display: flex;
+	gap: 4px;
+	cursor: pointer;
+	font-weight: 900;
+`
+
+const Input = styled.input.attrs({ type: 'checkbox' })`
+	appearance: none;
+	width: 24px;
+	height: 24px;
+	border-radius: 100%;
+	border: 8px solid #e5e8ec;
+	cursor: pointer;
+
+	outline: none; // 적용 안됨
+
+	&:checked {
+		background-color: transparent;
+		background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' fill='url(%23paint0_linear_102_3405)'/%3E%3Ccircle cx='12' cy='12' r='3' fill='white'/%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_102_3405' x1='2' y1='2' x2='2' y2='22' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23566391'/%3E%3Cstop offset='1' stop-color='%23324478'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E%0A");
+	}
+`
