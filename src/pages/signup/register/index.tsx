@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import { styled } from 'styled-components'
-import LargeButton from 'components/Button/Large'
+
 import Layout from 'layout'
 import * as S from './style'
+
+import LargeButton from 'components/Button/Large'
+import TitleText from 'components/common/TitleText'
 
 const Register = () => {
 	const [id, setId] = useState('')
@@ -78,7 +81,7 @@ const Register = () => {
 		<Layout>
 			<div className='flex flex-col items-center justify-center mt-[44px] md:mt-[88px]'>
 				<div className='w-[320px] md:w-[640px] flex flex-col justify-center items-center'>
-					<div className='text-[24px] md:text-[28px] font-extrabold mb-10 '>회원가입</div>
+					<TitleText className='md:mb-10' title={'회원가입'} />
 					<form action='#' id='signupForm' onSubmit={onSubmit} className='w-full'>
 						<div>
 							<S.InputWrapper>

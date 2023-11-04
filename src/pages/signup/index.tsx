@@ -6,6 +6,7 @@ import DropdownSVG from 'public/icons/btn_arrow_bottom.svg'
 import DroptopSVG from 'public/icons/btn_arrow_top.svg'
 
 import LargeButton from 'components/Button/Large'
+import TitleText from 'components/common/TitleText'
 
 const Signup = () => {
 	const [checkItems, setCheckItems] = useState<Array<string>>([])
@@ -42,9 +43,9 @@ const Signup = () => {
 		<Layout>
 			<div className='flex flex-col items-center justify-center mt-[44px] md:mt-[88px]'>
 				<div className='w-[320px] md:w-[840px] flex flex-col items-center'>
-					<div className='text-[24px] md:text-[28px] font-extrabold mb-6 md:mb-10'>회원가입</div>
-					<div className='flex justify-start w-full mb-4 md:mb-6'>
-						<p className='w-[60vw] font-bold text-[14px] md:text-[16px] leading-5'>
+					<TitleText className='mb-9 md:mb-10' title={'회원가입'} />
+					<div className='flex justify-start w-full mb-5 md:mb-6'>
+						<p className='w-[60vw] font-bold text-sm md:text-lg'>
 							담담에 오신 것을 환영합니다. <br /> 온라인 토의/토론 서비스 이용을 위하여 아래의 약관 동의가 필요합니다.
 						</p>
 					</div>
@@ -312,7 +313,7 @@ const Signup = () => {
 									</div>
 								</div>
 								{secondClick ? (
-									<div className='bg-[#F4F6F8] p-6 rounded-[16px]'>
+									<div className='bg-[#F4F6F8] p-6 mb-6 rounded-[16px]'>
 										<P>
 											당사는 "개인정보 보호법"에 따라 아래와 같이 수집하는 개인정보의 항목, 수집 및 이용 목적, 보유 및 이용 기간을
 											안내드리고 동의를 받고자 합니다.
@@ -321,10 +322,12 @@ const Signup = () => {
 										<table>
 											<thead className='border-y-[1px] border-y-black'>
 												<tr>
-													<th className='w-1/5 border-r-[1px] border-r-black bg-[#E5E8EC]'>구분(업무명)</th>
+													<th className='w-1/5 border-r-[1px] border-r-black bg-[#E5E8EC] font-extrabold text-[1.2rem] md:text-[1.4rem]'>
+														구분(업무명)
+													</th>
 													<TH>처리 목적</TH>
 													<TH>수집 항목</TH>
-													<th className='w-1/4 bg-[#E5E8EC]'>보유 및 이용기간</th>
+													<th className='w-1/4 bg-[#E5E8EC] text-[1.2rem] md:text-[1.4rem] font-extrabold'>보유 및 이용기간</th>
 												</tr>
 											</thead>
 											<tbody className='border-b-[1px] border-b-black'>
@@ -419,7 +422,7 @@ const Signup = () => {
 							</div>
 						</div>
 						<div className='w-full mt-6'>
-							<Text className='text-[12px] md:text-[14px]'>* 필수항목 거부시에는 회원가입이 제한됩니다.</Text>
+							<Text className='text-sm md:text-base'>* 필수항목 거부시에는 회원가입이 제한됩니다.</Text>
 						</div>
 						<div className='mt-[100px] mb-[16px] text-[#666666] w-full'>
 							<LargeButton text={'다음'} />
@@ -435,6 +438,10 @@ export default Signup
 
 const P = styled.p`
 	color: #383b40;
+
+	@media screen and (max-width: 768px) {
+		font-size: 1.2rem;
+	}
 `
 
 const Title = styled.h1`
@@ -447,29 +454,41 @@ const Text = styled.span`
 	font-weight: 500;
 
 	@media screen and (max-width: 768px) {
-		font-size: 14px;
+		font-size: 1.4rem;
 	}
 `
 
 const TH = styled.th`
 	font-weight: 900;
-	padding: 0px 8px;
+	padding: 0px 0.8rem;
 	white-space: nowrap;
 
 	border-right: 1px solid black;
 	width: 25%;
 
 	background-color: #e5e8ec;
+
+	@media screen and (max-width: 768px) {
+		font-size: 1.2rem;
+	}
 `
 
 const Td = styled.td`
-	font-size: 14px;
+	font-size: 1.4rem;
 	border-right: 1px solid black;
-	padding: 9px 12px;
+	padding: 0.9rem 1.2rem;
+
+	@media screen and (max-width: 768px) {
+		font-size: 1.2rem;
+	}
 `
 
 const TdItem = styled.li`
-	font-size: 14px;
+	font-size: 1.4rem;
+
+	@media screen and (max-width: 768px) {
+		font-size: 1.2rem;
+	}
 `
 
 const Label = styled.label`
@@ -479,7 +498,7 @@ const Label = styled.label`
 	font-weight: 900;
 
 	@media screen and (max-width: 768px) {
-		font-size: 14px;
+		font-size: 1.4rem;
 	}
 `
 
