@@ -12,6 +12,7 @@ import NavPointSVG from 'public/icons/gnb_point.svg'
 
 import styled from 'styled-components'
 import { useAuth } from 'utils/hooks/useAuth'
+import LoginModal from 'components/common/LoginModal'
 
 export default function Header() {
 	const { device } = useContext(LayoutContext)
@@ -25,6 +26,14 @@ export default function Header() {
 	const { user } = useAuth()
 	const loggedIn = user?.id
 
+	const [loginModal, setLoginModal] = useState<boolean>(false)
+
+	const onConfirmLogin = () => {
+		if (!loggedIn) return setLoginModal(true)
+
+		router.push('/study')
+	}
+
 	return (
 		<div id='header' className={isMobile ? 'small' : ''}>
 			<div className='w-full mx-auto lg:container'>
@@ -35,21 +44,21 @@ export default function Header() {
 				</div>
 				{!isMobile && (
 					<div className='flex flex-row items-start gap-24'>
-						<Link href='/study' className='relative'>
+						<div className='relative cursor-pointer' onClick={onConfirmLogin}>
 							<MenuItem>학습</MenuItem>
 							{curPath.includes('/study') && (
 								<>
 									<div className='w-full border-b-[3px] border-blue rounded-full' />
-									<NavPointSVG width={10} height={9} className='absolute top-0 -right-3' />
+									<NavPointSVG width={10} height={9} className='absolute top-0 -right-4' />
 								</>
 							)}
-						</Link>
+						</div>
 						<Link href='/topic' className='relative'>
 							<MenuItem>토픽</MenuItem>
 							{curPath.includes('/topic') && (
 								<>
 									<div className='w-full border-b-[3px] border-blue rounded-full' />
-									<NavPointSVG width={10} height={9} className='absolute top-0 -right-3' />
+									<NavPointSVG width={10} height={9} className='absolute top-0 -right-4' />
 								</>
 							)}
 						</Link>
@@ -58,14 +67,14 @@ export default function Header() {
 							{curPath.includes('/debate') && (
 								<>
 									<div className='w-full border-b-[3px] border-blue rounded-full' />
-									<NavPointSVG width={10} height={9} className='absolute top-0 -right-3' />
+									<NavPointSVG width={10} height={9} className='absolute top-0 -right-4' />
 								</>
 							)}
 						</Link>
 					</div>
 				)}
 
-				<div className='flex flex-row justify-end w-40'>
+				<div className='flex flex-row justify-end w-40 cursor-pointer hover:drop-shadow-md hover:scale-105 hover:transition-all active:drop-shadow-sm'>
 					{isMobile && <MenuSVG width={24} height={24} onClick={() => setModal(true)} />}
 					<Link href={'/login'}> {!isMobile && <CharSVG width={36} height={36} />}</Link>
 				</div>
@@ -107,22 +116,24 @@ export default function Header() {
 						</Link>
 						{!loggedIn ? (
 							<Link href='/login'>
-								<span className='block w-full py-4 text-base font-extrabold text-main-900'>로그인</span>
+								<span className='block w-full py-4 text-base font-extrabold text-blue'>로그인</span>
 							</Link>
 						) : (
-							<Link href='/debate'>
+							<Link href='/'>
 								<span className='block w-full py-4 text-base font-extrabold text-main-900'>마이</span>
 							</Link>
 						)}
 					</div>
 				</div>
 			</Modal>
+
+			<LoginModal open={loginModal} onClose={() => setLoginModal(false)} />
 		</div>
 	)
 }
 
 const MenuItem = styled.span`
-	font-size: 20px;
+	font-size: 1.8rem;
 	font-weight: 900;
 	color: #383b40;
 	white-space: nowrap;
