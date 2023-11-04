@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
 //-assets
-import ViewsSVG from 'public/icons/views.svg'
-import CommentsSVG from 'public/icons/comments.svg'
-import HotSVG from 'public/icons/hot.svg'
+import ViewsSVG from 'public/icons/icon_views.svg'
+import CommentsSVG from 'public/icons/icon_chat.svg'
+import HotSVG from 'public/icons/icon_hot.svg'
 import HeartOffSVG from 'public/icons/btn_heart_off_pc.svg'
 import HeartOnSVG from 'public/icons/btn_heart_on_pc.svg'
 

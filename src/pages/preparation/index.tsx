@@ -1,6 +1,6 @@
 import Layout from 'layout'
 import router from 'next/router'
-import NoResultSVG from 'public/illust/char_gray.svg'
+import NoResultSVG from 'public/icons/dambi/noresult_dambi.svg'
 
 const LandingPage = () => {
 	return (
