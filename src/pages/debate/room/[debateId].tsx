@@ -3,7 +3,7 @@ import type { NextPage, NextPageContext } from 'next'
 import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from 'redux/hook'
-import debate, { DebateAction } from 'redux/module/debate'
+import { DebateAction } from 'redux/module/debate'
 import { DebateChatAction } from 'redux/module/debateChat'
 import { useAuth } from 'utils/hooks/useAuth'
 import { getToken } from 'utils/axiosInstance'
@@ -21,7 +21,7 @@ import ArrowSVG from 'public/icons/btn_left_arrow_pc.svg'
 import ArrowMSVG from 'public/icons/btn_left_arrow_m.svg'
 import ClockSVG from 'public/icons/btn_clock_orange_m.svg'
 import PlaySVG from 'public/icons/orange_play_pc.svg'
-import CharSVG from 'public/illust/char_color.svg'
+import FloatingDambiSVG from 'public/icons/dambi/floating_dambi.svg'
 import DebateStartConfirmModal from 'components/Debate/modal/StartConfirm'
 
 interface Props {
@@ -33,25 +33,6 @@ export const getServerSideProps = async (context: NextPageContext) => {
 	const { debateId } = query
 
 	return { props: { debateId } }
-}
-
-const colors = {
-	'시작 전': {
-		text: '#4DCB96',
-		border: '#4DCB96',
-	},
-	'진행 중': {
-		text: '#ED7743',
-		border: '#ED7743',
-	},
-	종료: {
-		text: '#ACB1BA',
-		border: '#FFFFFF',
-	},
-	취소: {
-		text: '#ACB1BA',
-		border: '#FFFFFF',
-	},
 }
 
 const DebateChatRoomPage: NextPage<Props> = ({ debateId }: Props) => {
@@ -170,12 +151,12 @@ const DebateChatRoomPage: NextPage<Props> = ({ debateId }: Props) => {
 						{info?.title}
 					</span>
 
-					<span className='text-[13px] text-point-900 font-normal'>참관자 : {info?.observeUserIds?.length || 0}명</span>
+					<span className='text-[13px] text-bluefont-normal'>참관자 : {info?.observeUserIds?.length || 0}명</span>
 				</div>
 			</div>
 
 			<div
-				className='w-full flex flex-col md:container mx-auto grow overflow-hidden'
+				className='flex flex-col w-full mx-auto overflow-hidden md:container grow'
 				style={{ maxHeight: 'calc(100vh - 100px - 128px - 40px)' }}
 			>
 				<div className='flex flex-row items-end'>
@@ -197,7 +178,7 @@ const DebateChatRoomPage: NextPage<Props> = ({ debateId }: Props) => {
 					) : undefined}
 				</div>
 
-				<div className='relative flex flex-col justify-between grow mb-0 md:mb-12 overflow-auto scroll-hidden'>
+				<div className='relative flex flex-col justify-between mb-0 overflow-auto grow md:mb-12 scroll-hidden'>
 					<DebateChatBox
 						room={room}
 						chat={chat || []}
@@ -205,7 +186,7 @@ const DebateChatRoomPage: NextPage<Props> = ({ debateId }: Props) => {
 						className={`${device !== 'mobile' && !isMember && 'rounded-t-[24px]'} grow p-12`}
 					/>
 
-					<CharSVG
+					<FloatingDambiSVG
 						width={56}
 						height={56}
 						className={`absolute ${chkVisibleInput ? 'bottom-[180px]' : 'bottom-12'} right-12 cursor-pointer`}
@@ -217,11 +198,11 @@ const DebateChatRoomPage: NextPage<Props> = ({ debateId }: Props) => {
 					<div className='flex flex-col items-center bg-[#F4F6F8] rounded-b-[24px] px-12 pb-12 pt-4'>
 						{isAuthor && step === '시작 전' && (
 							<div
-								className='w-fit flex flex-row gap-[6px] items-center px-6 py-1 mb-6 bg-white border-2 border-[#ED7743] rounded-full select-none cursor-pointer'
+								className='w-fit flex flex-row gap-[6px] items-center px-6 py-1 mb-6 bg-white border-2 border-orange rounded-full select-none cursor-pointer'
 								onClick={() => start()}
 							>
 								<PlaySVG width={16} height={16} />
-								<span className='text-[13px] text-[#ED7743] font-extrabold'>시작하기</span>
+								<span className='text-[13px] text-orange font-extrabold'>시작하기</span>
 							</div>
 						)}
 
@@ -229,10 +210,10 @@ const DebateChatRoomPage: NextPage<Props> = ({ debateId }: Props) => {
 							<div
 								className={`w-fit flex flex-row gap-[6px] items-center px-6 py-1 ${
 									chkVisibleInput && 'mb-6'
-								} bg-white border-2 border-[#ED7743] rounded-full select-none`}
+								} bg-white border-2 border-orange rounded-full select-none`}
 							>
 								<ClockSVG width={16} height={16} />
-								<span className='text-[13px] text-[#ED7743] font-extrabold'>{count}초</span>
+								<span className='text-[13px] text-orange font-extrabold'>{count}초</span>
 							</div>
 						) : undefined}
 

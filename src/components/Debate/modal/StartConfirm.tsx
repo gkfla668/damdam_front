@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { LayoutContext } from 'context/Layout'
 
 import Modal from 'react-modal'
-import CharSVG from 'public/illust/char_color.svg'
+import CharSVG from 'public/icons/dambi/floating_dambi.svg'
 import IconSVG from 'public/icons/orange_play_pc.svg'
 import IconMSVG from 'public/icons/orange_play_m.svg'
 
@@ -60,7 +60,7 @@ const DebateStartConfirmModal = ({ open, onClose, onSubmit, className }: Props) 
 							)}
 						</div>
 
-						<span className='text-xl text-main-900 font-extrabold text-center'>
+						<span className='text-xl font-extrabold text-center text-main-900'>
 							아직 모든 토론자가 참석하지 않았습니다.
 							<br />
 							정말로 토론을 시작하시나요?
@@ -70,11 +70,11 @@ const DebateStartConfirmModal = ({ open, onClose, onSubmit, className }: Props) 
 					<div className='flex flex-row gap-5 mb-[14px]'></div>
 				</div>
 
-				<div className='flex flex-row justify-between bg-white rounded-b-lg overflow-hidden'>
-					<button className='btn btn-block btn-gray rounded-none' onClick={() => submit()}>
+				<div className='flex flex-row justify-between overflow-hidden bg-white rounded-b-lg'>
+					<button className='rounded-none btn btn-block btn-gray' onClick={() => submit()}>
 						예
 					</button>
-					<button className='btn btn-block btn-gray rounded-none' onClick={() => onClose && onClose()}>
+					<button className='rounded-none btn btn-block btn-gray' onClick={() => onClose && onClose()}>
 						아니오
 					</button>
 				</div>

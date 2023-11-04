@@ -1,6 +1,6 @@
 import type { NextPage, NextPageContext } from 'next'
 //-next
-import { use, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from 'redux/hook'
 import { DebateAction } from 'redux/module/debate'
@@ -18,7 +18,7 @@ import DebateObserveJoinModal from 'components/Debate/modal/ObserveJoin'
 //-assets
 import ArrowSVG from 'public/icons/btn_left_arrow_pc.svg'
 import ArrowMSVG from 'public/icons/btn_left_arrow_m.svg'
-import CharSVG from 'public/illust/char_color.svg'
+import FloatingDambiSVG from 'public/icons/dambi/floating_dambi.svg'
 
 interface Props {
 	id: string
@@ -90,20 +90,20 @@ const DebateDetailViewPage: NextPage<Props> = ({ id }: Props) => {
 
 	return (
 		<Layout>
-			<div className='container mx-auto mt-12 md:mt-24 pb-5 scroll-hidden'>
+			<div className='container pb-5 mx-auto mt-12 md:mt-24 scroll-hidden'>
 				<div className='relative flex flex-col items-center mb-12 pb-12 border-b border-[#E5E8EC]'>
 					<div className='absolute left-0 cursor-pointer' onClick={() => router.back()}>
 						{device === 'mobile' ? <ArrowMSVG width={24} height={24} /> : <ArrowSVG width={48} height={48} />}
 					</div>
 
-					<span className='text-base text-point-900 font-extrabold mb-2'>토론 상세</span>
+					<span className='mb-2 text-base font-extrabold text-blue'>토론 상세</span>
 					<span className='max-w-[70%] md:max-w-[80%] text-xl md:text-3xl leading-[30px] md:leading-[44px] text-center text-main-900 font-extrabold mb-3'>
 						{info?.title}
 					</span>
 
-					<div className='flex flex-row items-center flex-wrap gap-2'>
+					<div className='flex flex-row flex-wrap items-center gap-2'>
 						{info?.categorys?.map((str) => (
-							<span key={str} className='text-sm text-point-900 font-normal'>
+							<span key={str} className='text-sm font-normal text-blue'>
 								#{str}
 							</span>
 						))}
@@ -112,32 +112,32 @@ const DebateDetailViewPage: NextPage<Props> = ({ id }: Props) => {
 
 				<div className='relative flex flex-col mb-12 pb-10 border-b border-[#E5E8EC]'>
 					<div className='relative flex flex-col gap-4'>
-						<div className='flex flex-row gap-6 items-center'>
-							<span className='text-base text-main-900 font-normal'>진행 상태</span>
+						<div className='flex flex-row items-center gap-6'>
+							<span className='text-base font-normal text-main-900'>진행 상태</span>
 							<span className={`text-base ${info?.status ? `text-[${colors[info.status].text}]` : 'text-main-900'} font-extrabold`}>
 								{info?.status}
 							</span>
 						</div>
 
-						<div className='flex flex-row gap-6 items-center'>
-							<span className='text-base text-main-900 font-normal'>토론 일자</span>
-							<span className='text-base text-main-900 font-extrabold'>{moment(info?.startAt).format('YYYY-MM-DD')}</span>
+						<div className='flex flex-row items-center gap-6'>
+							<span className='text-base font-normal text-main-900'>토론 일자</span>
+							<span className='text-base font-extrabold text-main-900'>{moment(info?.startAt).format('YYYY-MM-DD')}</span>
 						</div>
 
-						<div className='flex flex-row gap-6 items-center'>
-							<span className='text-base text-main-900 font-normal'>토론 시간</span>
-							<span className='text-base text-main-900 font-extrabold'>{moment(info?.startAt).format('a hh:mm')}</span>
+						<div className='flex flex-row items-center gap-6'>
+							<span className='text-base font-normal text-main-900'>토론 시간</span>
+							<span className='text-base font-extrabold text-main-900'>{moment(info?.startAt).format('a hh:mm')}</span>
 						</div>
 
-						<div className='flex flex-row gap-6 items-center'>
-							<span className='text-base text-main-900 font-normal'>토론 인원</span>
-							<span className='text-base text-main-900 font-extrabold'>
+						<div className='flex flex-row items-center gap-6'>
+							<span className='text-base font-normal text-main-900'>토론 인원</span>
+							<span className='text-base font-extrabold text-main-900'>
 								{info?.maxUsers}:{info?.maxUsers}
 							</span>
 						</div>
 					</div>
 
-					<CharSVG
+					<FloatingDambiSVG
 						width={56}
 						height={56}
 						className={`absolute top-0 right-0 cursor-pointer`}
@@ -148,7 +148,7 @@ const DebateDetailViewPage: NextPage<Props> = ({ id }: Props) => {
 				</div>
 
 				<div className='flex flex-col items-center mb-12'>
-					<span className='text-base text-main-900 font-extrabold mb-7'>현재 팀원</span>
+					<span className='text-base font-extrabold text-main-900 mb-7'>현재 팀원</span>
 					<table className='debate-people'>
 						<tr>
 							<th>구분</th>

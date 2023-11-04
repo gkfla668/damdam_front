@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { LayoutContext } from 'context/Layout'
 
 import Modal from 'react-modal'
-import CharSVG from 'public/illust/char_color.svg'
+import CharSVG from 'public/icons/dambi/floating_dambi.svg'
 import IconSVG from 'public/icons/orange_my_pc.svg'
 import IconMSVG from 'public/icons/orange_my_pc.svg'
 import PasswordModal from './Password'
@@ -70,22 +70,22 @@ const DebateMemberJoinModal = ({ open, password, maxUsers, agreeUserIds, disagre
 							)}
 						</div>
 
-						<span className='text-xl text-main-900 font-extrabold mb-10'>토론자로 참가하고 싶은 팀을 선택해주세요.</span>
-						<div className='w-full flex flex-row gap-4'>
+						<span className='mb-10 text-xl font-extrabold text-main-900'>토론자로 참가하고 싶은 팀을 선택해주세요.</span>
+						<div className='flex flex-row w-full gap-4'>
 							<button
 								className={`btn btn-block ${team === 'agree' && 'btn-point'} rounded-[20px] flex flex-col h-[86px]`}
 								onClick={() => setTeam('agree')}
 							>
-								<span className='text-xl text-point-900'>찬성팀</span>
-								<span className='text-sm text-point-900'>(남은 인원 {maxUsers - agreeUserIds.length}명)</span>
+								<span className='text-xl text-blue'>찬성팀</span>
+								<span className='text-sm text-blue'>(남은 인원 {maxUsers - agreeUserIds.length}명)</span>
 							</button>
 
 							<button
 								className={`btn btn-block ${team === 'disagree' && 'btn-point'} rounded-[20px] flex flex-col h-[86px]`}
 								onClick={() => setTeam('disagree')}
 							>
-								<span className='text-xl text-point-900'>반대팀</span>
-								<span className='text-sm text-point-900'>(남은 인원 {maxUsers - disagreeUserIds.length}명)</span>
+								<span className='text-xl text-blue'>반대팀</span>
+								<span className='text-sm text-blue'>(남은 인원 {maxUsers - disagreeUserIds.length}명)</span>
 							</button>
 						</div>
 					</div>
@@ -93,11 +93,11 @@ const DebateMemberJoinModal = ({ open, password, maxUsers, agreeUserIds, disagre
 					<div className='flex flex-row gap-5 mb-[14px]'></div>
 				</div>
 
-				<div className='flex flex-row justify-between bg-white rounded-b-lg overflow-hidden'>
-					<button className='btn btn-block btn-gray rounded-none' onClick={() => onClose && onClose()}>
+				<div className='flex flex-row justify-between overflow-hidden bg-white rounded-b-lg'>
+					<button className='rounded-none btn btn-block btn-gray' onClick={() => onClose && onClose()}>
 						취소
 					</button>
-					<button className='btn btn-block btn-gray rounded-none' onClick={() => submit()}>
+					<button className='rounded-none btn btn-block btn-gray' onClick={() => submit()}>
 						확인
 					</button>
 				</div>

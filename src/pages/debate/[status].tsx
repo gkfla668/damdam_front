@@ -17,10 +17,11 @@ import DebateItemCard from 'components/Debate/Card'
 //-assets
 import ArrowSVG from 'public/icons/btn_arrow_bottom2.svg'
 import SearchSVG from 'public/icons/btn_search.svg'
-import NoResultSVG from 'public/illust/char_gray.svg'
+import NoResultSVG from 'public/icons/dambi/noresult_dambi.svg'
 //-types
 import { DebateCategory } from 'types/debate/info'
 import { LayoutContext } from 'context/Layout'
+import DebateMemberCancelModal from 'components/Debate/modal/MemberCancel'
 
 interface Props {
 	status: string
@@ -55,6 +56,8 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 	const [maxUsers, setMaxUsers] = useState<string>('')
 	const [search, setSearch] = useState<string>('')
 	const [my, setMy] = useState<boolean>(false)
+
+	const [modal, setModal] = useState<boolean>(false)
 
 	const goAddPage = () => {
 		if (!loggedIn) return toast.error('로그인이 필요합니다')
@@ -191,7 +194,7 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 				</div>
 
 				<div className='flex flex-col'>
-					<MenuTab active={status} onClick={(val) => router.push(`/debate/${val}`)} list={menu_list} className='mb-8' />
+					<MenuTab active={status} onClick={(val) => router.push(`/debate/${val}`)} list={menu_list} className='pb-4 mb-8' />
 
 					<div className='flex flex-col flex-wrap justify-between gap-3 mb-12 md:flex-row'>
 						<div className='flex flex-row items-center grow'>

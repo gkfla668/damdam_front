@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { LayoutContext } from 'context/Layout'
 
 import Modal from 'react-modal'
-import CharSVG from 'public/illust/char_color.svg'
+import CharSVG from 'public/icons/dambi/floating_dambi.svg'
 import IconSVG from 'public/icons/orange_icon_exit_pc.svg'
 import IconMSVG from 'public/icons/orange_icon_exit_m.svg'
 
@@ -61,15 +61,15 @@ const DebateMemberCancelModal = ({ open, onClose, onSubmit, className }: Props) 
 							)}
 						</div>
 
-						<span className='text-xl text-main-900 font-extrabold mb-10'>정말로 토론 참가를 취소하시겠습니까?</span>
+						<span className='mb-10 text-xl font-extrabold text-main-900'>정말로 토론 참가를 취소하시겠습니까?</span>
 					</div>
 				</div>
 
-				<div className='flex flex-row justify-between bg-white rounded-b-lg overflow-hidden'>
-					<button className='btn btn-block btn-gray rounded-none' onClick={() => onClose && onClose()}>
+				<div className='flex flex-row justify-between overflow-hidden bg-white rounded-b-lg'>
+					<button className='rounded-none btn btn-block btn-gray' onClick={() => onClose && onClose()}>
 						취소
 					</button>
-					<button className='btn btn-block btn-gray rounded-none' onClick={() => submit()}>
+					<button className='rounded-none btn btn-block btn-gray' onClick={() => submit()}>
 						확인
 					</button>
 				</div>

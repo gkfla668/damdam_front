@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { LayoutContext } from 'context/Layout'
 
 import Modal from 'react-modal'
-import CharSVG from 'public/illust/char_color.svg'
+import CharSVG from 'public/icons/dambi/floating_dambi.svg'
 import IconSVG from 'public/icons/orange_lock_pc.svg'
 import IconMSVG from 'public/icons/orange_lock_m.svg'
 import TextInput from 'components/Input/TextInput'
@@ -61,7 +61,7 @@ const PasswordModal = ({ open, onClose, onSubmit, className }: Props) => {
 						)}
 					</div>
 
-					<span className='text-xl text-main-900 text-center font-extrabold mb-10'>
+					<span className='mb-10 text-xl font-extrabold text-center text-main-900'>
 						잠금된 토론입니다.
 						<br />
 						비밀번호를 입력해주세요.
