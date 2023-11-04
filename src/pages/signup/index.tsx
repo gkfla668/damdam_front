@@ -40,12 +40,15 @@ const Signup = () => {
 
 	return (
 		<Layout>
-			<div className='flex flex-col items-center justify-center mt-[88px]'>
-				<div className='w-[840px] flex flex-col items-center'>
-					<div className='text-[28px] font-extrabold mb-10'>회원가입</div>
-					<p className='w-full my-6 font-bold'>
-						담담에 오신 것을 환영합니다. <br /> 온라인 토의/토론 서비스 이용을 위하여 아래의 약관 동의가 필요합니다.
-					</p>
+			<div className='flex flex-col items-center justify-center mt-[44px] md:mt-[88px]'>
+				<div className='w-[320px] md:w-[840px] flex flex-col items-center'>
+					<div className='text-[24px] md:text-[28px] font-extrabold mb-6 md:mb-10'>회원가입</div>
+					<div className='flex justify-start w-full mb-4 md:mb-6'>
+						<p className='w-[60vw] font-bold text-[14px] md:text-[16px] leading-5'>
+							담담에 오신 것을 환영합니다. <br /> 온라인 토의/토론 서비스 이용을 위하여 아래의 약관 동의가 필요합니다.
+						</p>
+					</div>
+
 					<form action='/signup/register' id='signupForm' className='flex flex-col items-start w-full'>
 						{/** 전체동의 체크박스 */}
 						<div className=' w-full flex items-center gap-2 py-4 border-y-[1px] border-y-[#e5e8ec]'>
@@ -416,10 +419,10 @@ const Signup = () => {
 							</div>
 						</div>
 						<div className='w-full mt-6'>
-							<Text className='text-[14px]'>* 필수항목 거부시에는 회원가입이 제한됩니다.</Text>
+							<Text className='text-[12px] md:text-[14px]'>* 필수항목 거부시에는 회원가입이 제한됩니다.</Text>
 						</div>
-						<div className='mt-[100px] mb-[16px] text-[#666666]'>
-							<LargeButton text={'다음'} width={'840'} />
+						<div className='mt-[100px] mb-[16px] text-[#666666] w-full'>
+							<LargeButton text={'다음'} />
 						</div>
 					</form>
 				</div>
@@ -442,6 +445,10 @@ const Title = styled.h1`
 const Text = styled.span`
 	color: #383b40;
 	font-weight: 500;
+
+	@media screen and (max-width: 768px) {
+		font-size: 14px;
+	}
 `
 
 const TH = styled.th`
@@ -470,6 +477,10 @@ const Label = styled.label`
 	gap: 4px;
 	cursor: pointer;
 	font-weight: 900;
+
+	@media screen and (max-width: 768px) {
+		font-size: 14px;
+	}
 `
 
 const Input = styled.input.attrs({ type: 'checkbox' })`

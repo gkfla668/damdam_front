@@ -45,7 +45,7 @@ const Register = () => {
 
 		if (userInput.length !== 0) {
 			if (pwd.length < 8) return setPwdConfirmMsg('* 비밀번호를 먼저 입력해 주세요.')
-			if (curPwd.length !== 0 && pwd !== userInput) return setPwdConfirmMsg('* 비밀번호가 다릅니다.')
+			if (userInput.length !== 0 && pwd !== userInput) return setPwdConfirmMsg('* 비밀번호가 다릅니다.')
 		}
 		return setPwdConfirmMsg('')
 	}
@@ -76,90 +76,92 @@ const Register = () => {
 
 	return (
 		<Layout>
-			<div className='flex flex-col items-center justify-center w-full'>
-				<div className='text-[28px] font-extrabold mb-10 mt-[100px]'>회원가입</div>
-				<form action='#' id='signupForm' onSubmit={onSubmit}>
-					<div>
-						<S.InputWrapper>
-							<S.InputLabel>아이디</S.InputLabel>
-							<S.Input
-								required
-								placeholder='아이디'
-								value={id}
-								onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeId(e)}
-								minLength={5}
-								maxLength={20}
-							/>
-							<S.MessageText>{idCheckMsg}</S.MessageText>
-						</S.InputWrapper>
-						<S.InputWrapper>
-							<S.InputLabel>비밀번호</S.InputLabel>
-							<S.Input
-								required
-								type='password'
-								placeholder='비밀번호'
-								value={pwd}
-								onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangePwd(e)}
-								minLength={8}
-								maxLength={16}
-							/>
-							<S.MessageText>{pwdCheckMsg}</S.MessageText>
-						</S.InputWrapper>
-						<S.InputWrapper>
-							<S.InputLabel>비밀번호 확인</S.InputLabel>
-							<S.Input
-								type='password'
-								placeholder='비밀번호 확인'
-								required
-								value={confirmPwd}
-								onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangePwdConfirm(e)}
-								minLength={8}
-								maxLength={16}
-							/>
-							<S.MessageText>{pwdConfirmMsg}</S.MessageText>
-						</S.InputWrapper>
-						<S.InputWrapper>
-							<S.InputLabel>이름</S.InputLabel>
-							<S.Input
-								required
-								placeholder='이름'
-								value={name}
-								onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeName(e)}
-								minLength={2}
-								maxLength={5}
-							/>
-							<S.MessageText>{nameCheckMsg}</S.MessageText>
-						</S.InputWrapper>
-						<S.InputWrapper>
-							<S.InputLabel>생년월일 8자리</S.InputLabel>
-							<S.Input
-								required
-								placeholder='생년월일 8자리'
-								value={dateOfBirth}
-								onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeDateOfBirth(e)}
-								minLength={8}
-								maxLength={8}
-							/>
-							<S.MessageText>{dateOfBirthCheckMsg}</S.MessageText>
-						</S.InputWrapper>
-						<div className='pb-[36px] border-b-[1px] border-b-[#D8D8D8] flex flex-col gap-2'>
-							<S.InputLabel htmlFor='gender'>성별</S.InputLabel>
-							<div className='flex gap-3'>
-								<FormRadioInput type='radio' id='radio-1' name='gender' value='male' checked />
-								<FormRadioLabel htmlFor='radio-1'>여자</FormRadioLabel>
+			<div className='flex flex-col items-center justify-center mt-[44px] md:mt-[88px]'>
+				<div className='w-[320px] md:w-[640px] flex flex-col justify-center items-center'>
+					<div className='text-[24px] md:text-[28px] font-extrabold mb-10 '>회원가입</div>
+					<form action='#' id='signupForm' onSubmit={onSubmit} className='w-full'>
+						<div>
+							<S.InputWrapper>
+								<S.InputLabel>아이디</S.InputLabel>
+								<S.Input
+									required
+									placeholder='아이디'
+									value={id}
+									onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeId(e)}
+									minLength={5}
+									maxLength={20}
+								/>
+								<S.MessageText>{idCheckMsg}</S.MessageText>
+							</S.InputWrapper>
+							<S.InputWrapper>
+								<S.InputLabel>비밀번호</S.InputLabel>
+								<S.Input
+									required
+									type='password'
+									placeholder='비밀번호'
+									value={pwd}
+									onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangePwd(e)}
+									minLength={8}
+									maxLength={16}
+								/>
+								<S.MessageText>{pwdCheckMsg}</S.MessageText>
+							</S.InputWrapper>
+							<S.InputWrapper>
+								<S.InputLabel>비밀번호 확인</S.InputLabel>
+								<S.Input
+									type='password'
+									placeholder='비밀번호 확인'
+									required
+									value={confirmPwd}
+									onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangePwdConfirm(e)}
+									minLength={8}
+									maxLength={16}
+								/>
+								<S.MessageText>{pwdConfirmMsg}</S.MessageText>
+							</S.InputWrapper>
+							<S.InputWrapper>
+								<S.InputLabel>이름</S.InputLabel>
+								<S.Input
+									required
+									placeholder='이름'
+									value={name}
+									onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeName(e)}
+									minLength={2}
+									maxLength={5}
+								/>
+								<S.MessageText>{nameCheckMsg}</S.MessageText>
+							</S.InputWrapper>
+							<S.InputWrapper>
+								<S.InputLabel>생년월일 8자리</S.InputLabel>
+								<S.Input
+									required
+									placeholder='생년월일 8자리'
+									value={dateOfBirth}
+									onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeDateOfBirth(e)}
+									minLength={8}
+									maxLength={8}
+								/>
+								<S.MessageText>{dateOfBirthCheckMsg}</S.MessageText>
+							</S.InputWrapper>
+							<div className='pb-[28px] md:pb-[36px] border-b-[1px] border-b-[#D8D8D8] flex flex-col gap-2'>
+								<S.InputLabel htmlFor='gender'>성별</S.InputLabel>
+								<div className='flex gap-3'>
+									<FormRadioInput type='radio' id='radio-1' name='gender' value='male' checked />
+									<FormRadioLabel htmlFor='radio-1'>여자</FormRadioLabel>
 
-								<FormRadioInput type='radio' id='radio-2' name='gender' value='female' />
-								<FormRadioLabel htmlFor='radio-2'>남자</FormRadioLabel>
+									<FormRadioInput type='radio' id='radio-2' name='gender' value='female' />
+									<FormRadioLabel htmlFor='radio-2'>남자</FormRadioLabel>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div className='mt-[36px]'>
-						<p className='font-extrabold'>건강한 토의토론 문자를 위해 본인인증 서비스를 실시하고 있습니다.</p>
-					</div>
-					<div className='mt-[100px] mb-[16px] text-[#666666]'>
-						<LargeButton text={'완료'} width={'840'} />
-					</div>
-				</form>
+						<div className='mt-[28px] md:mt-[36px]'>
+							<p className='font-extrabold md:text-[16px] text-[14px]'>건강한 토의토론 문자를 위해 본인인증 서비스를 실시하고 있습니다.</p>
+						</div>
+						<div className='mt-[100px] mb-[16px] text-[#666666]'>
+							<LargeButton text={'완료'} width={'840'} />
+						</div>
+					</form>
+				</div>
 			</div>
 		</Layout>
 	)
@@ -168,8 +170,7 @@ const Register = () => {
 export default Register
 
 const FormRadioLabel = styled.label`
-	width: 100px;
-	height: 56px;
+	padding: 14px 36px;
 
 	border: 1px solid #adb2bb;
 	border-radius: 50px;
@@ -179,6 +180,12 @@ const FormRadioLabel = styled.label`
 	align-items: center;
 
 	cursor: pointer;
+
+	@media screen and (max-width: 768px) {
+		width: 100%;
+		padding: 10px 0px;
+		font-size: 14px;
+	}
 `
 
 const FormRadioInput = styled.input.attrs({ type: 'radio' })`
