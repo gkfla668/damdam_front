@@ -11,6 +11,10 @@
 	--toastify-color-progress-light: #324478;
 }
 
+html {
+	font-size: 62.5%;
+}
+
 .w-webkit {
 	width: -webkit-fill-available;
 }
@@ -31,11 +35,12 @@
 		@apply text-base text-black font-sans;
 	}
 
-	.scrollbar-visible-none, .scroll-hidden {
+	.scrollbar-visible-none,
+	.scroll-hidden {
 		-ms-overflow-style: none !important; /* IE and Edge */
 		scrollbar-width: none !important; /* Firefox */
 		&::-webkit-scrollbar {
 			display: none !important; /* Chrome, Safari, Opera*/
 		}
-	}	
+	}
 }
