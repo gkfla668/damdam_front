@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from 'redux/hook'
 import { DebateAction } from 'redux/module/debate'
 import { useAuth } from 'utils/hooks/useAuth'
 //-modules
-import { toast } from 'react-toastify'
 import { LayoutContext } from 'context/Layout'
 //-Components
 import Layout from 'layout'
@@ -45,10 +44,11 @@ const Topic: NextPage<Props> = ({ status }: Props) => {
 
 	const { device } = useContext(LayoutContext)
 	const { user } = useAuth()
+	const loggedIn = user?.id
+
 	const { dashboard, page, count, totalPages } = useAppSelector((state) => state.debate)
 	//-chk
 	const isAll = status === '전체'
-	const loggedIn = user?.id
 	//-search
 	const [category, setCategory] = useState<string>('전체')
 	const [filter, setFilter] = useState<string>('최신순')
@@ -94,7 +94,7 @@ const Topic: NextPage<Props> = ({ status }: Props) => {
 	const Dashboard = () => {
 		return (
 			<div className='flex flex-col '>
-				<div className='flex flex-wrap gap-[4rem] mb-10'>
+				<div className='flex flex-wrap gap-[4rem] mt-12 mb-16'>
 					{list?.map(
 						(obj) =>
 							(category === obj.category || category === '전체') && (
@@ -117,7 +117,7 @@ const Topic: NextPage<Props> = ({ status }: Props) => {
 				<div className='flex flex-col'>
 					<MenuTab active={status} list={menu_list} onClick={(val) => goInterestedTopic(val)} className='pb-4 mb-8' />
 
-					<div className='flex flex-col flex-wrap justify-between gap-3 mb-12 md:flex-row'>
+					<div className='flex flex-col flex-wrap justify-between w-full gap-3 md:flex-row'>
 						<div className='flex flex-row items-center gap-3 grow'>
 							<TextInput
 								type='select'
@@ -125,7 +125,7 @@ const Topic: NextPage<Props> = ({ status }: Props) => {
 								value={category}
 								onChange={(val: string) => setCategory(val)}
 								options={[{ label: '전체', value: '전체' }, ...DebateCategory.map((str) => ({ label: str, value: str }))]}
-								boxClass='min-w-[130px] max-w-[130px] md:min-w-[160px] md:max-w-[160px]'
+								boxClass=' w-full md:min-w-[160px] md:max-w-[160px] '
 							/>
 							<TextInput
 								type='select'
@@ -136,13 +136,13 @@ const Topic: NextPage<Props> = ({ status }: Props) => {
 									{ label: '최신순', value: '최신순' },
 									{ label: '인기순', value: '인기순' },
 								]}
-								boxClass='min-w-[130px] max-w-[130px] md:min-w-[160px] md:max-w-[160px]'
+								boxClass='w-full md:min-w-[160px] md:max-w-[160px]'
 							/>
 						</div>
 						<div className='flex flex-col items-center justify-end gap-3 grow md:flex-row'>
 							<TextInput
 								type='text'
-								placeholder='검색어를 입력하세요.'
+								placeholder='토픽 주제를 검색하세요.'
 								value={search}
 								onChange={(val: string) => setSearch(val)}
 								onSubmit={() => explore({})}
