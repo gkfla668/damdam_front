@@ -6,13 +6,16 @@ import * as S from './style'
 
 import LargeButton from 'components/Button/Large'
 import TitleText from 'components/common/TitleText'
+import axios from 'axios'
+import { useRouter } from 'next/router'
 
 const Register = () => {
-	const [id, setId] = useState('')
-	const [pwd, setPwd] = useState('')
+	const [identity, setIdentity] = useState('')
+	const [password, setPassword] = useState('')
 	const [confirmPwd, setConfirmPwd] = useState('')
 	const [name, setName] = useState('')
-	const [dateOfBirth, setDateOfBirth] = useState('')
+	const [birth, setBirth] = useState('')
+	const [sex, setSex] = useState('woman')
 
 	const [idCheckMsg, setIdCheckMsg] = useState('') /** 아이디 유효성 검사를 위한 메세지 */
 	const [pwdCheckMsg, setPwdCheckMsg] = useState('') /** 비밀번호 유효성 검사를 위한 메세지 */
@@ -20,10 +23,12 @@ const Register = () => {
 	const [nameCheckMsg, setNameCheckMsg] = useState('')
 	const [dateOfBirthCheckMsg, setDateOfBirthCheckMsg] = useState('') /** 생년월일 유효성 검사를 위한 메세지 */
 
+	const router = useRouter()
+
 	const idRegex = /^(?=.*[a-z])(?=.*[0-9]).{5,20}$/
 	const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const userInput = e.target.value
-		setId(userInput)
+		setIdentity(userInput)
 
 		/** 아이디 유효성 검사 */
 		if (userInput.length !== 0 && !idRegex.test(userInput)) return setIdCheckMsg('* 5~20자의 영문 소문자, 숫자를 조합하여 입력해 주세요.')
@@ -33,7 +38,7 @@ const Register = () => {
 	const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/
 	const onChangePwd = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const userInput = e.target.value
-		setPwd(userInput)
+		setPassword(userInput)
 
 		/** 비밀번호 유효성 검사 */
 		if (userInput.length !== 0 && !passwordRegex.test(userInput))
@@ -47,8 +52,8 @@ const Register = () => {
 		setConfirmPwd(userInput)
 
 		if (userInput.length !== 0) {
-			if (pwd.length < 8) return setPwdConfirmMsg('* 비밀번호를 먼저 입력해 주세요.')
-			if (userInput.length !== 0 && pwd !== userInput) return setPwdConfirmMsg('* 비밀번호가 다릅니다.')
+			if (password.length < 8) return setPwdConfirmMsg('* 비밀번호를 먼저 입력해 주세요.')
+			if (userInput.length !== 0 && password !== userInput) return setPwdConfirmMsg('* 비밀번호가 다릅니다.')
 		}
 		return setPwdConfirmMsg('')
 	}
@@ -66,15 +71,42 @@ const Register = () => {
 	const dateOfBirthRegex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/
 	const onChangeDateOfBirth = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const userInput = e.target.value
-		setDateOfBirth(userInput)
+		setBirth(userInput)
 
 		/** 생년월일 유효성 검사 */
 		if (userInput.length !== 0 && !dateOfBirthRegex.test(userInput)) return setDateOfBirthCheckMsg('* 숫자 8자리를 입력해주세요.')
 		return setDateOfBirthCheckMsg('')
 	}
 
-	const onSubmit = () => {
-		// 백엔드 통신 코드
+	const apiInstance = axios.create({
+		baseURL: process.env.NEXT_PUBLIC_API,
+		headers: {
+			'Content-Type': 'application/json',
+			// 다른 헤더 설정
+		},
+	})
+
+	const onSubmit = async () => {
+		const userData = {
+			identity: identity,
+			password: password,
+			name: name,
+			birth: birth,
+			sex: sex,
+		}
+		try {
+			const response = await apiInstance.post('/auth/register', JSON.stringify(userData))
+			if (response.status === 200) {
+				alert('회원가입에 성공하였습니다.')
+
+				router.push('/login')
+			} else {
+				alert('회원가입 실패')
+				console.error('회원 가입 실패')
+			}
+		} catch (error) {
+			console.error('API 요청 중 오류 발생:', error)
+		}
 	}
 
 	return (
@@ -82,14 +114,15 @@ const Register = () => {
 			<div className='flex flex-col items-center justify-center mt-[44px] md:mt-[88px]'>
 				<div className='w-[320px] md:w-[640px] flex flex-col justify-center items-center'>
 					<TitleText className='md:mb-10' title={'회원가입'} />
-					<form action='#' id='signupForm' onSubmit={onSubmit} className='w-full'>
+					<form className='w-full'>
 						<div>
 							<S.InputWrapper>
 								<S.InputLabel>아이디</S.InputLabel>
 								<S.Input
 									required
+									type='text'
 									placeholder='아이디'
-									value={id}
+									value={identity}
 									onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeId(e)}
 									minLength={5}
 									maxLength={20}
@@ -102,7 +135,7 @@ const Register = () => {
 									required
 									type='password'
 									placeholder='비밀번호'
-									value={pwd}
+									value={password}
 									onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangePwd(e)}
 									minLength={8}
 									maxLength={16}
@@ -126,6 +159,7 @@ const Register = () => {
 								<S.InputLabel>이름</S.InputLabel>
 								<S.Input
 									required
+									type='text'
 									placeholder='이름'
 									value={name}
 									onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeName(e)}
@@ -138,8 +172,9 @@ const Register = () => {
 								<S.InputLabel>생년월일 8자리</S.InputLabel>
 								<S.Input
 									required
+									type='text'
 									placeholder='생년월일 8자리'
-									value={dateOfBirth}
+									value={birth}
 									onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeDateOfBirth(e)}
 									minLength={8}
 									maxLength={8}
@@ -149,10 +184,10 @@ const Register = () => {
 							<div className='pb-[28px] md:pb-[36px] border-b-[1px] border-b-[#D8D8D8] flex flex-col gap-2'>
 								<S.InputLabel htmlFor='gender'>성별</S.InputLabel>
 								<div className='flex gap-3'>
-									<FormRadioInput type='radio' id='radio-1' name='gender' value='male' checked />
+									<FormRadioInput onChange={() => setSex('woman')} type='radio' id='radio-1' name='gender' value='woman' checked />
 									<FormRadioLabel htmlFor='radio-1'>여자</FormRadioLabel>
 
-									<FormRadioInput type='radio' id='radio-2' name='gender' value='female' />
+									<FormRadioInput onChange={() => setSex('man')} type='radio' id='radio-2' name='gender' value='man' />
 									<FormRadioLabel htmlFor='radio-2'>남자</FormRadioLabel>
 								</div>
 							</div>
@@ -160,8 +195,8 @@ const Register = () => {
 						<div className='mt-[28px] md:mt-[36px]'>
 							<p className='font-extrabold md:text-[16px] text-[14px]'>건강한 토의토론 문자를 위해 본인인증 서비스를 실시하고 있습니다.</p>
 						</div>
-						<div className='mt-[100px] mb-[16px] text-[#666666]'>
-							<LargeButton text={'완료'} width={'840'} />
+						<div className='w-full mt-[100px] mb-[16px] text-[#666666]'>
+							<LargeButton text={'완료'} onClick={() => onSubmit()} />
 						</div>
 					</form>
 				</div>
