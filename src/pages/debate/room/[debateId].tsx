@@ -21,7 +21,7 @@ import ArrowSVG from 'public/icons/btn_left_arrow_pc.svg'
 import ArrowMSVG from 'public/icons/btn_left_arrow_m.svg'
 import ClockSVG from 'public/icons/btn_clock_orange_m.svg'
 import PlaySVG from 'public/icons/orange_play_pc.svg'
-import FloatingDambiSVG from 'public/icons/dambi/floating_dambi.svg'
+import DambiSVG from 'public/icons/dambi/round_color_dambi.svg'
 import DebateStartConfirmModal from 'components/Debate/modal/StartConfirm'
 
 interface Props {
@@ -140,101 +140,116 @@ const DebateChatRoomPage: NextPage<Props> = ({ debateId }: Props) => {
 	}, [count])
 
 	return (
-		<Layout option={{ style: { maxHeight: 'calc(100vh - 100px) !important', overflow: 'hidden' } }}>
-			<div className='container mx-auto mt-12 mb-10'>
-				<div className='relative flex flex-col items-center'>
-					<div className='absolute left-0 cursor-pointer' onClick={() => router.back()}>
-						{device === 'mobile' ? <ArrowMSVG width={24} height={24} /> : <ArrowSVG width={48} height={48} />}
-					</div>
+		<Layout
+			option={{
+				style: {
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					overflow: 'hidden',
+				},
+			}}
+		>
+			<div className={`${device !== 'mobile' ? 'w-[50vw]' : 'w-[100vw'} h-[100%] flex flex-col`}>
+				<div className='container mx-auto my-[1.4rem] md:my-[2.4rem]'>
+					<div className='relative flex flex-col items-center'>
+						<div className='absolute left-0 cursor-pointer top-2' onClick={() => router.back()}>
+							{device === 'mobile' ? <ArrowSVG width={20} height={20} /> : <ArrowSVG width={28} height={28} />}
+						</div>
 
-					<span className='max-w-[70%] md:max-w-[80%] text-xl md:text-3xl leading-[30px] md:leading-[44px] text-center text-main-900 font-extrabold mb-3'>
-						{info?.title}
-					</span>
+						<div className='flex flex-col items-center justify-center w-full gap-3'>
+							<span className='max-w-[80%] md:max-w-[60%] text-lg md:text-[2rem] leading-[2rem] md:leading-[2.4rem] text-center text-main-900 font-extrabold'>
+								{info?.title}
+							</span>
 
-					<span className='text-[13px] text-bluefont-normal'>참관자 : {info?.observeUserIds?.length || 0}명</span>
-				</div>
-			</div>
-
-			<div
-				className='flex flex-col w-full mx-auto overflow-hidden md:container grow'
-				style={{ maxHeight: 'calc(100vh - 100px - 128px - 40px)' }}
-			>
-				<div className='flex flex-row items-end'>
-					{isMember ? (
-						<>
-							<button
-								className={`btn btn-block ${group === 'all' ? '' : 'btn-gray'} rounded-none md:rounded-tl-[24px]`}
-								onClick={() => setGroup('all')}
-							>
-								전체채팅
-							</button>
-							<button
-								className={`btn btn-block ${group === 'team' ? '' : 'btn-gray'} rounded-none md:rounded-tr-[24px]`}
-								onClick={() => setGroup('team')}
-							>
-								팀채팅
-							</button>
-						</>
-					) : undefined}
-				</div>
-
-				<div className='relative flex flex-col justify-between mb-0 overflow-auto grow md:mb-12 scroll-hidden'>
-					<DebateChatBox
-						room={room}
-						chat={chat || []}
-						input={chkVisibleInput}
-						className={`${device !== 'mobile' && !isMember && 'rounded-t-[24px]'} grow p-12`}
-					/>
-
-					<FloatingDambiSVG
-						width={56}
-						height={56}
-						className={`absolute ${chkVisibleInput ? 'bottom-[180px]' : 'bottom-12'} right-12 cursor-pointer`}
-						style={{
-							filter: 'drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.08))',
-						}}
-					/>
-
-					<div className='flex flex-col items-center bg-[#F4F6F8] rounded-b-[24px] px-12 pb-12 pt-4'>
-						{isAuthor && step === '시작 전' && (
-							<div
-								className='w-fit flex flex-row gap-[6px] items-center px-6 py-1 mb-6 bg-white border-2 border-orange rounded-full select-none cursor-pointer'
-								onClick={() => start()}
-							>
-								<PlaySVG width={16} height={16} />
-								<span className='text-[13px] text-orange font-extrabold'>시작하기</span>
-							</div>
-						)}
-
-						{count > 0 ? (
-							<div
-								className={`w-fit flex flex-row gap-[6px] items-center px-6 py-1 ${
-									chkVisibleInput && 'mb-6'
-								} bg-white border-2 border-orange rounded-full select-none`}
-							>
-								<ClockSVG width={16} height={16} />
-								<span className='text-[13px] text-orange font-extrabold'>{count}초</span>
-							</div>
-						) : undefined}
-
-						{chkVisibleInput && (
-							<ChatInput
-								value={message}
-								onChange={(val) => setMessage(val)}
-								onSubmit={() => send()}
-								placeholder='입력하기'
-								className='w-full'
-							/>
-						)}
+							<span className='text-sm md:text-[13px] font-normal'>참관자 : {info?.observeUserIds?.length || 0}명</span>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<DebateStartConfirmModal
-				open={modalConfirm}
-				onClose={() => setModalConfirm(false)}
-				onSubmit={() => socket.emit('start', { roomId: room?.id, debateId })}
-			/>
+				<div className='relative flex flex-col overflow-hidden md:container grow' style={{ maxHeight: '100vh' }}>
+					<div className='flex justify-center items-center w-full bg-[#F4F6F8] pb-4 pt-2'>
+						<div className='relative flex top-4 w-[180px] h-[36px] bg-[#E2E8FA] rounded-full '>
+							{isMember ? (
+								<div className='flex rounded-full '>
+									<button
+										className={`absolute top-0 left-0 border-none whitespace-nowrap py-3 w-[50%] text-[#747983] font-extrabold ${
+											group === 'all' && 'bg-white text-blue '
+										} ${group === 'all' ? '' : 'btn-gray'} rounded-[24px]`}
+										onClick={() => setGroup('all')}
+									>
+										전체 채팅
+									</button>
+									<button
+										className={`absolute top-0 right-0 whitespace-nowrap py-3 w-[50%] text-[#747983] font-extrabold border-none ${
+											group === 'team' && 'bg-white text-blue'
+										} ${group === 'team' ? '' : 'btn-gray'}  rounded-[24px]`}
+										onClick={() => setGroup('team')}
+									>
+										팀 채팅
+									</button>
+								</div>
+							) : undefined}
+						</div>
+					</div>
+					<div className='flex flex-col justify-between mb-0 overflow-auto grow scroll-hidden'>
+						<DebateChatBox
+							room={room}
+							chat={chat || []}
+							input={chkVisibleInput}
+							className={`${device !== 'mobile' && !isMember && 'rounded-t-[24px]'} h-[100vh] grow px-8 py-8`}
+						/>
+
+						<DambiSVG
+							width={56}
+							height={56}
+							className={`absolute ${chkVisibleInput ? 'bottom-40 md:bottom-48' : 'bottom-12'} right-10 md:right-16 cursor-pointer`}
+							style={{
+								filter: 'drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.08))',
+							}}
+						/>
+
+						<div className='flex flex-col items-center bg-[#F4F6F8] rounded-b-[24px] px-8 pb-8 pt-4'>
+							{isAuthor && step === '시작 전' && (
+								<div
+									className='w-fit flex flex-row gap-[6px] items-center px-6 py-2 mb-6 bg-white border-2 border-orange rounded-full select-none cursor-pointer'
+									onClick={() => start()}
+								>
+									<PlaySVG width={16} height={16} />
+									<span className='text-[13px] text-orange font-extrabold'>시작하기</span>
+								</div>
+							)}
+
+							{count > 0 ? (
+								<div
+									className={`w-fit flex flex-row gap-[6px] items-center px-6 py-1 ${
+										chkVisibleInput && 'mb-6'
+									} bg-white border-2 border-orange rounded-full select-none`}
+								>
+									<ClockSVG width={16} height={16} />
+									<span className='text-[13px] text-orange font-extrabold'>{count}초</span>
+								</div>
+							) : undefined}
+
+							{chkVisibleInput && (
+								<ChatInput
+									value={message}
+									onChange={(val) => setMessage(val)}
+									onSubmit={() => send()}
+									placeholder='입력하기'
+									className='w-full'
+								/>
+							)}
+						</div>
+					</div>
+				</div>
+
+				<DebateStartConfirmModal
+					open={modalConfirm}
+					onClose={() => setModalConfirm(false)}
+					onSubmit={() => socket.emit('start', { roomId: room?.id, debateId })}
+				/>
+			</div>
 		</Layout>
 	)
 }

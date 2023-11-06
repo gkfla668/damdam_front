@@ -14,8 +14,9 @@
 		border-spacing: 0;
 		overflow: hidden;
 
-		th, td {
-			@apply h-12 border-b border-r border-[#E5E8EC];
+		th,
+		td {
+			@apply p-4 border-b border-r border-[#E5E8EC];
 			@apply text-base text-main-900 text-center;
 		}
 
@@ -25,7 +26,7 @@
 		}
 
 		tr > th:first-child {
-			width: 120px;
+			width: 20%;
 		}
 		tr > *:last-child {
 			@apply border-r-0;
@@ -38,7 +39,7 @@
 	.message-box {
 		@apply w-fit bg-white rounded-3xl px-8 py-4;
 		&.message-point {
-			background: linear-gradient(180deg, #526394 0%, #2D457C 100%);
+			background: linear-gradient(180deg, #526394 0%, #2d457c 100%);
 			* {
 				@apply text-white;
 			}

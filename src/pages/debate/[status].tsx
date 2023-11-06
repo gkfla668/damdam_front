@@ -5,8 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/hook'
 import { DebateAction } from 'redux/module/debate'
 import { useAuth } from 'utils/hooks/useAuth'
-//-modules
-import { toast } from 'react-toastify'
+
 //-Components
 import Link from 'next/link'
 import Layout from 'layout'
@@ -15,13 +14,14 @@ import TextInput from 'components/Input/TextInput'
 import CheckBox from 'components/Input/CheckBox'
 import DebateItemCard from 'components/Debate/Card'
 //-assets
-import ArrowSVG from 'public/icons/btn_arrow_bottom2.svg'
+import ArrowSVG from 'public/icons/btn_arrow_right.svg'
 import SearchSVG from 'public/icons/btn_search.svg'
-import NoResultSVG from 'public/icons/dambi/noresult_dambi.svg'
+import DambiSVG from 'public/icons/dambi/round_gray_dambi.svg'
 //-types
 import { DebateCategory } from 'types/debate/info'
 import { LayoutContext } from 'context/Layout'
-import DebateMemberCancelModal from 'components/Debate/modal/MemberCancel'
+
+import LoginModal from 'components/common/LoginModal'
 
 interface Props {
 	status: string
@@ -47,10 +47,12 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 
 	const { device } = useContext(LayoutContext)
 	const { user } = useAuth()
+	const loggedIn = user?.id
+
 	const { dashboard, data, page, count, totalPages } = useAppSelector((state) => state.debate)
 	//-chk
 	const isAll = status === '전체'
-	const loggedIn = user?.id
+
 	//-search
 	const [category, setCategory] = useState<string>('')
 	const [maxUsers, setMaxUsers] = useState<string>('')
@@ -60,11 +62,11 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 	const [modal, setModal] = useState<boolean>(false)
 
 	const goAddPage = () => {
-		if (!loggedIn) return toast.error('로그인이 필요합니다')
+		if (!loggedIn) return setModal(true)
 		router.push('/debate/form/new')
 	}
 	const goDebateDetailPage = (id: string) => {
-		if (!loggedIn) return toast.error('로그인이 필요합니다')
+		if (!loggedIn) return setModal(true)
 		router.push(`/debate/detail/${id}`)
 	}
 
@@ -88,7 +90,7 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 	//-Components
 	const NoResult = () => (
 		<div className='flex flex-col items-center w-full gap-6 mt-8 mb-20'>
-			<NoResultSVG width={100} height={100} />
+			<DambiSVG width={100} height={100} />
 			<span className='text-base font-normal text-center text-main-900'>
 				토론이 없습니다.
 				<br />
@@ -114,7 +116,7 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 				{wait?.length ? (
 					<>
 						<div className='flex flex-row items-center justify-between mb-5'>
-							<span className='text-xl font-extrabold text-main-900'>토론자 모집 중</span>
+							<span className='md:text-[2rem] text-base font-extrabold text-main-900'>토론자 모집 중</span>
 							<Link href={`/debate/${menu_list[1].value}`}>
 								<div className='flex flex-row items-center gap-[2px]'>
 									<span className='text-[13px] leading-4 text-main-900 font-normal'>더보기</span>
@@ -187,24 +189,24 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 
 	return (
 		<Layout>
-			<div className='container mx-auto mt-12 md:mt-13 md:mb-13 pb:12'>
+			<div className='container p-0 mx-auto mt-12 md:mt-13 md:mb-13 mb:12'>
 				<div className='flex flex-col items-center mb-16'>
-					<span className='mb-2 text-3xl font-extrabold md:text-[32px] text-main-900'>토론</span>
-					<span className='text-sm font-normal md:text-[16px] text-main-900'>사람들과 다양한 주제로 토론해보세요.</span>
+					<span className='mb-2 text-[2rem] font-extrabold md:text-[3.2rem] text-main-900'>토론</span>
+					<span className='text-sm font-normal md:text-lg text-main-900'>사람들과 다양한 주제로 토론해보세요.</span>
 				</div>
 
 				<div className='flex flex-col'>
 					<MenuTab active={status} onClick={(val) => router.push(`/debate/${val}`)} list={menu_list} className='pb-4 mb-8' />
 
 					<div className='flex flex-col flex-wrap justify-between gap-3 mb-12 md:flex-row'>
-						<div className='flex flex-row items-center grow'>
+						<div className='flex items-center justify-between gap-3 grow'>
 							<TextInput
 								type='select'
 								placeholder='전체'
 								value={category}
 								onChange={(val: string) => setCategory(val)}
 								options={[{ label: '전체', value: undefined }, ...DebateCategory.map((str) => ({ label: str, value: str }))]}
-								boxClass='min-w-[130px] max-w-[130px] md:min-w-[160px] md:max-w-[160px] mr-3'
+								boxClass='w-full md:min-w-[160px] md:max-w-[160px]'
 							/>
 							<TextInput
 								type='select'
@@ -218,7 +220,7 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 									{ label: '3:3', value: '3:3' },
 									{ label: '4:4', value: '4:4' },
 								]}
-								boxClass='min-w-[130px] max-w-[130px] md:min-w-[160px] md:max-w-[160px] mr-6'
+								boxClass='w-full md:min-w-[160px] md:max-w-[160px]'
 							/>
 
 							{loggedIn && <CheckBox text='내 토론만 보기' check={my} setCheck={(val) => setMy(val)} />}
@@ -243,6 +245,7 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 					{isAll ? <Dashboard /> : <Search />}
 				</div>
 			</div>
+			<LoginModal open={modal} onClose={() => setModal(false)} />
 		</Layout>
 	)
 }

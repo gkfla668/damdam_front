@@ -18,7 +18,7 @@ import DebateObserveJoinModal from 'components/Debate/modal/ObserveJoin'
 //-assets
 import ArrowSVG from 'public/icons/btn_left_arrow_pc.svg'
 import ArrowMSVG from 'public/icons/btn_left_arrow_m.svg'
-import FloatingDambiSVG from 'public/icons/dambi/floating_dambi.svg'
+import FloatingDambiSVG from 'public/icons/dambi/round_color_dambi.svg'
 
 interface Props {
 	id: string
@@ -33,20 +33,16 @@ export const getServerSideProps = async (context: NextPageContext) => {
 
 const colors = {
 	'시작 전': {
-		text: '#ED7743',
-		border: '#4DCB96',
+		text: '#4DCB96',
 	},
 	'진행 중': {
 		text: '#ED7743',
-		border: '#ED7743',
 	},
 	종료: {
 		text: '#ACB1BA',
-		border: '#FFFFFF',
 	},
 	취소: {
 		text: '#ACB1BA',
-		border: '#FFFFFF',
 	},
 }
 
@@ -88,19 +84,22 @@ const DebateDetailViewPage: NextPage<Props> = ({ id }: Props) => {
 		}
 	}, [status])
 
+	const color = info?.status && colors[info?.status]
+
 	return (
 		<Layout>
-			<div className='container pb-5 mx-auto mt-12 md:mt-24 scroll-hidden'>
-				<div className='relative flex flex-col items-center mb-12 pb-12 border-b border-[#E5E8EC]'>
-					<div className='absolute left-0 cursor-pointer' onClick={() => router.back()}>
-						{device === 'mobile' ? <ArrowMSVG width={24} height={24} /> : <ArrowSVG width={48} height={48} />}
+			<div className='container pb-12 mt-12 md:mt-16 scroll-hidden md:w-[840px] p-0'>
+				<div className='relative flex flex-col items-center pb-12 border-b border-[#E5E8EC]'>
+					<div className='absolute left-0 cursor-pointer top-4' onClick={() => router.back()}>
+						{device === 'mobile' ? <ArrowSVG width={24} height={24} /> : <ArrowSVG width={32} height={32} />}
 					</div>
 
-					<span className='mb-2 text-base font-extrabold text-blue'>토론 상세</span>
-					<span className='max-w-[70%] md:max-w-[80%] text-xl md:text-3xl leading-[30px] md:leading-[44px] text-center text-main-900 font-extrabold mb-3'>
+					<span className='text-base font-extrabold text-blue'>토론 상세</span>
+					<span className='my-2 max-w-[70%] md:max-w-[70%] text-xl md:text-[2rem] leading-[2rem] md:leading-[2.4rem] text-center text-main-900 font-extrabold '>
 						{info?.title}
 					</span>
 
+					{/** 카테고리 */}
 					<div className='flex flex-row flex-wrap items-center gap-2'>
 						{info?.categorys?.map((str) => (
 							<span key={str} className='text-sm font-normal text-blue'>
@@ -110,11 +109,11 @@ const DebateDetailViewPage: NextPage<Props> = ({ id }: Props) => {
 					</div>
 				</div>
 
-				<div className='relative flex flex-col mb-12 pb-10 border-b border-[#E5E8EC]'>
+				<div className='relative flex flex-col py-[3.6rem] border-b border-[#E5E8EC]'>
 					<div className='relative flex flex-col gap-4'>
 						<div className='flex flex-row items-center gap-6'>
 							<span className='text-base font-normal text-main-900'>진행 상태</span>
-							<span className={`text-base ${info?.status ? `text-[${colors[info.status].text}]` : 'text-main-900'} font-extrabold`}>
+							<span className='text-base font-extrabold' style={{ color: color?.text }}>
 								{info?.status}
 							</span>
 						</div>
@@ -140,15 +139,15 @@ const DebateDetailViewPage: NextPage<Props> = ({ id }: Props) => {
 					<FloatingDambiSVG
 						width={56}
 						height={56}
-						className={`absolute top-0 right-0 cursor-pointer`}
+						className={`absolute top-12 right-2 cursor-pointer`}
 						style={{
 							filter: 'drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.08))',
 						}}
 					/>
 				</div>
 
-				<div className='flex flex-col items-center mb-12'>
-					<span className='text-base font-extrabold text-main-900 mb-7'>현재 팀원</span>
+				<div className='flex flex-col items-center pt-[3.2rem] pb-[4.8rem]'>
+					<span className='text-base font-extrabold md:text-lg text-main-900 mb-7'>현재 팀원</span>
 					<table className='debate-people'>
 						<tr>
 							<th>구분</th>
@@ -168,11 +167,11 @@ const DebateDetailViewPage: NextPage<Props> = ({ id }: Props) => {
 				<div className='flex flex-row justify-between gap-2 md:gap-4'>
 					{isAuthor ? (
 						<>
-							<button className='btn btn-block' onClick={() => router.push(`/debate/form/${info?.id}`)}>
+							<button className='py-[1.4rem] btn btn-block' onClick={() => router.push(`/debate/form/${info?.id}`)}>
 								수정하기
 							</button>
 							<button
-								className='btn btn-block btn-point'
+								className='py-[1.4rem] btn btn-block btn-point'
 								onClick={() => (isMember ? router.push(`/debate/room/${info?.id}`) : setModalJoin(true))}
 							>
 								입장하기
@@ -181,29 +180,29 @@ const DebateDetailViewPage: NextPage<Props> = ({ id }: Props) => {
 					) : isMember ? (
 						<>
 							{isWait && (
-								<button className='btn btn-block' onClick={() => setModalCancel(true)}>
+								<button className='py-[1.4rem] btn btn-block' onClick={() => setModalCancel(true)}>
 									참가 취소하기
 								</button>
 							)}
-							<button className='btn btn-block btn-point' onClick={() => router.push(`/debate/room/${info?.id}`)}>
+							<button className=' py-[1.4rem] btn btn-block btn-point' onClick={() => router.push(`/debate/room/${info?.id}`)}>
 								입장하기
 							</button>
 						</>
 					) : isObserve ? (
 						<>
-							<button className='btn btn-block btn-point' onClick={() => router.push(`/debate/room/${info?.id}`)}>
+							<button className='py-[1.4rem] btn btn-block btn-point' onClick={() => router.push(`/debate/room/${info?.id}`)}>
 								참관하기
 							</button>
 						</>
 					) : (
 						<>
 							{!isWait && (
-								<button className='btn btn-block' onClick={() => setModalObserve(true)}>
+								<button className='py-[1.4rem] btn btn-block' onClick={() => setModalObserve(true)}>
 									참관하기
 								</button>
 							)}
 							{isWait && (
-								<button className='btn btn-block btn-point' onClick={() => setModalJoin(true)}>
+								<button className='py-[1.4rem] btn btn-block btn-point' onClick={() => setModalJoin(true)}>
 									참가하기
 								</button>
 							)}

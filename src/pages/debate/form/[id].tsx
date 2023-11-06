@@ -18,6 +18,7 @@ import ArrowSVG from 'public/icons/btn_left_arrow_pc.svg'
 import ArrowMSVG from 'public/icons/btn_left_arrow_m.svg'
 //-types
 import { DebateCategory } from 'types/debate/info'
+import styled from 'styled-components'
 
 interface Props {
 	id: string
@@ -97,59 +98,59 @@ const DebateFormPage: NextPage<Props> = ({ id }: Props) => {
 
 	return (
 		<Layout>
-			<div className='container mx-auto mt-12 md:mt-24 pb-5 scroll-hidden'>
-				<div className='relative flex flex-col items-center mb-20'>
-					<div className='absolute left-0 cursor-pointer' onClick={() => router.back()}>
-						{device === 'mobile' ? <ArrowMSVG width={24} height={24} /> : <ArrowSVG width={48} height={48} />}
+			<div className='container mt-12 pb-12 md:pb-13 md:mt-13 scroll-hidden md:w-[840px] p-0'>
+				<div className='relative flex flex-col items-center mb-12 md:mb-16'>
+					<div className='absolute left-0 cursor-pointer top-4' onClick={() => router.back()}>
+						{device === 'mobile' ? <ArrowSVG width={24} height={24} /> : <ArrowSVG width={32} height={32} />}
 					</div>
-					<span className='text-3xl md:text-5xl text-main-900 font-extrabold mb-2'>토론 {isNew ? '개설' : '수정'}</span>
-					<span className='text-sm md:text-base text-main-900 font-normal'>
+					<span className='mb-2 text-[2rem] font-extrabold md:text-[3.2rem] text-main-900'>토론 {isNew ? '개설' : '수정'}</span>
+					<span className='text-sm font-normal md:text-lg text-main-900'>
 						{isNew ? '토론방을 새롭게 개설하세요.' : '토론방의 정보를 수정하세요.'}
 					</span>
 				</div>
 
-				<div className='flex flex-col gap-12 mb-16'>
-					<div className='flex flex-col'>
-						<span className='text-base text-main-900 font-extrabold mb-1'>카테고리</span>
-						<span className='text-[13px] text-main-900 font-normal mb-6'>토론 논제와 관련된 카테고리를 최대 3개 선택해주세요.</span>
+				<div className='flex flex-col mb-12 md:mb-16 gap-9 md:gap-12'>
+					<SubWrapper>
+						<SubTitle>카테고리</SubTitle>
+						<Span>토론 논제와 관련된 카테고리를 최대 3개 선택해주세요.</Span>
 
-						<div className='flex flex-row items-center flex-wrap gap-3'>
+						<div className='flex flex-row flex-wrap items-center gap-3'>
 							{DebateCategory.map((str) => (
 								<SelectBox text={str} check={categorys.includes(str)} setCheck={() => toggleCategory(str)} />
 							))}
 						</div>
-					</div>
+					</SubWrapper>
 
-					<div className='flex flex-col'>
-						<span className='text-base text-main-900 font-extrabold mb-1'>논제</span>
-						<span className='text-[13px] text-main-900 font-normal mb-6'>토론 논제 찬반이 명확하게 나뉘는 주제로 작성해주세요.</span>
+					<SubWrapper>
+						<SubTitle>논제</SubTitle>
+						<Span>토론 논제 찬반이 명확하게 나뉘는 주제로 작성해주세요.</Span>
 
-						<TextInput value={title} onChange={(val: string) => setTitle(val)} placeholder='논제 입력하기' boxClass='mb-3' />
-						<span className='text-[13px] text-[#747983] font-normal'>* 한글 기준 100자 이내</span>
-					</div>
+						<TextInput value={title} onChange={(val: string) => setTitle(val)} placeholder='논제 입력하기' boxClass='mb-3' maxLength={70} />
+						<span className='text-sm text-[#747983] font-normal'>* 한글 기준 100자 이내</span>
+					</SubWrapper>
 
-					<div className='flex flex-col'>
-						<span className='text-base text-main-900 font-extrabold mb-1'>토론 인원</span>
-						<span className='text-[13px] text-main-900 font-normal mb-6'>토론에 참가할 인원을 선택해주세요.</span>
+					<SubWrapper>
+						<SubTitle>토론 인원</SubTitle>
+						<Span>토론에 참가할 인원을 선택해주세요.</Span>
 
-						<div className='flex flex-row items-center flex-wrap gap-3'>
+						<div className='flex flex-row flex-wrap items-center gap-3'>
 							<SelectBox text={'1:1'} check={maxUsers === 1} setCheck={() => setMaxUsers(1)} />
 							<SelectBox text={'2:2'} check={maxUsers === 2} setCheck={() => setMaxUsers(2)} />
 							<SelectBox text={'3:3'} check={maxUsers === 3} setCheck={() => setMaxUsers(3)} />
 							<SelectBox text={'4:4'} check={maxUsers === 4} setCheck={() => setMaxUsers(4)} />
 						</div>
-					</div>
+					</SubWrapper>
 
-					<div className='flex flex-col'>
-						<span className='text-base text-main-900 font-extrabold mb-4'>잠금 설정</span>
+					<SubWrapper>
+						<SubTitle>잠금 설정</SubTitle>
 						<div className='flex flex-row items-center gap-6 mb-2'>
-							<span className='tex-tsm text-main-900 font-extrabold min-w-[140px]'>누구나 토론자로 참여</span>
+							<span className='text-base text-main-900 font-extrabold min-w-[140px]'>누구나 토론자로 참여</span>
 							<Radio text='허용' check={isAllowIncome} setCheck={() => setIsAllowIncome(true)} />
 							<Radio text='비허용' check={!isAllowIncome} setCheck={() => setIsAllowIncome(false)} />
 						</div>
 
 						<div className='flex flex-row items-center gap-6 mb-3'>
-							<span className='tex-tsm text-main-900 font-extrabold min-w-[140px]'>누구나 토론 참관</span>
+							<span className='text-base text-main-900 font-extrabold min-w-[140px]'>누구나 토론 참관</span>
 							<Radio text='허용' check={isAllowObserve} setCheck={() => setIsAllowObserve(true)} />
 							<Radio text='비허용' check={!isAllowObserve} setCheck={() => setIsAllowObserve(false)} />
 						</div>
@@ -167,11 +168,11 @@ const DebateFormPage: NextPage<Props> = ({ id }: Props) => {
 								/>
 							</div>
 						) : undefined}
-					</div>
+					</SubWrapper>
 
-					<div className='flex flex-col'>
-						<span className='text-base text-main-900 font-extrabold mb-1'>토론 예정 일시</span>
-						<span className='text-[13px] text-main-900 font-normal mb-6'>토론을 진행할 예정인 날짜와 시간을 선택해주세요.</span>
+					<SubWrapper>
+						<SubTitle>토론 예정 일시</SubTitle>
+						<Span>토론을 진행할 예정인 날짜와 시간을 선택해주세요.</Span>
 
 						<div className='flex flex-row justify-between gap-4'>
 							<TextInput
@@ -187,14 +188,14 @@ const DebateFormPage: NextPage<Props> = ({ id }: Props) => {
 								boxClass='grow'
 							/>
 						</div>
-					</div>
+					</SubWrapper>
 				</div>
 
 				<div className='flex flex-row justify-between gap-2 md:gap-4'>
 					{isNew ? (
 						<>
 							<button
-								className={`btn btn-block ${isActive ? 'btn-point' : 'btn-disabled-gradient cursor-not-allowed'}`}
+								className={`py-[1.4rem] btn btn-block ${isActive ? 'btn-point' : 'btn-disabled-gradient cursor-not-allowed'}`}
 								onClick={() => submit()}
 							>
 								완료하기
@@ -202,10 +203,10 @@ const DebateFormPage: NextPage<Props> = ({ id }: Props) => {
 						</>
 					) : (
 						<>
-							<button className='btn btn-block' onClick={() => remove()}>
+							<button className='py-[1.4rem] btn btn-block' onClick={() => remove()}>
 								토론 삭제하기
 							</button>
-							<button className='btn btn-block btn-point' onClick={() => submit()}>
+							<button className='py-[1.4rem] btn btn-block btn-point' onClick={() => submit()}>
 								수정 완료하기
 							</button>
 						</>
@@ -215,5 +216,26 @@ const DebateFormPage: NextPage<Props> = ({ id }: Props) => {
 		</Layout>
 	)
 }
+
+const SubWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+`
+const SubTitle = styled.span`
+	font-size: 1.6rem;
+	font-weight: 900;
+	color: #383b40;
+	margin-bottom: 0.4rem;
+`
+
+const Span = styled.span`
+	font-size: 1.3rem;
+	color: #383b40;
+	margin-bottom: 2.4rem;
+
+	@media screen and (max-width: 768px) {
+		margin-bottom: 1.6rem;
+	}
+`
 
 export default DebateFormPage
