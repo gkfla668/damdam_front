@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { LayoutContext } from 'context/Layout'
 
 import Modal from 'react-modal'
-import CharSVG from 'public/icons/dambi/floating_dambi.svg'
+import CharSVG from 'public/icons/dambi/round_color_dambi.svg'
 import IconSVG from 'public/icons/orange_play_pc.svg'
 import IconMSVG from 'public/icons/orange_play_m.svg'
 
@@ -27,8 +27,8 @@ const DebateStartConfirmModal = ({ open, onClose, onSubmit, className }: Props) 
 			border: 0,
 			radius: 12,
 			width: '100%',
-			minWidth: device === 'desktop' ? 396 : 0,
-			maxWidth: 640,
+			minWidth: device === 'desktop' ? 396 : 320,
+			maxWidth: 320,
 			height: 'auto',
 			maxHeight: '100vh',
 			overflow: 'auto',
@@ -60,7 +60,7 @@ const DebateStartConfirmModal = ({ open, onClose, onSubmit, className }: Props) 
 							)}
 						</div>
 
-						<span className='text-xl font-extrabold text-center text-main-900'>
+						<span className='text-base font-extrabold text-center md:text-lg text-main-900'>
 							아직 모든 토론자가 참석하지 않았습니다.
 							<br />
 							정말로 토론을 시작하시나요?

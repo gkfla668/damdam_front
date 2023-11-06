@@ -44,14 +44,14 @@ const DebateItemCard = ({ data, column = 3, gap = 40, onClick }: Props) => {
 			}}
 		>
 			<div className='flex flex-col justify-between grow px-6 py-7 border-b border-[#E5E8EC]'>
-				<span className='text-sm font-extrabold mb-2' style={{ color: color.text }}>
+				<span className='mb-2 font-extrabold md:text-sm' style={{ color: color.text }}>
 					{data.status}
 				</span>
-				<span className='text-2xl text-main-900 font-extrabold mb-2'>{data.title}</span>
+				<span className='mb-2 font-extrabold leading-8 md:text-lg text-main-900'>{data.title}</span>
 
-				<div className='flex flex-row items-center flex-wrap gap-2'>
+				<div className='flex flex-row flex-wrap items-center gap-2'>
 					{data?.categorys?.map((str) => (
-						<span key={makeId(12)} className='text-sm text-point-900 font-normal'>
+						<span key={makeId(12)} className='text-sm font-normal text-blue'>
 							#{str}
 						</span>
 					))}
@@ -60,9 +60,9 @@ const DebateItemCard = ({ data, column = 3, gap = 40, onClick }: Props) => {
 
 			<div className='flex flex-row px-6 py-5'>
 				<CalendarSVG width={16} height={16} className='mr-2' />
-				<span className='text-sm text-main-900 font-extrabold mr-3'>{moment(data?.startAt).format('YYYY.MM.DD a hh:mm')}</span>
+				<span className='mr-3 text-sm font-extrabold text-main-900'>{moment(data?.startAt).format('YYYY.MM.DD a hh:mm')}</span>
 				<PeopleSVG width={16} height={16} className='mr-2' />
-				<span className='text-sm text-main-900 font-extrabold'>
+				<span className='text-sm font-extrabold text-main-900'>
 					{data.maxUsers}:{data.maxUsers}
 				</span>
 			</div>

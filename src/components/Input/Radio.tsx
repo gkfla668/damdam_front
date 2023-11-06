@@ -12,7 +12,7 @@ const Radio = ({ text, check, setCheck, className }: Props) => {
 	return (
 		<div className={`flex flex-row items-center gap-2 cursor-pointer`} onClick={() => setCheck(!check)}>
 			{check ? <RadioOn width={24} height={24} /> : <RadioOff width={24} height={24} />}
-			<span className='text-sm text-main-900 font-normal'>{text}</span>
+			<span className='text-base font-normal text-main-900'>{text}</span>
 		</div>
 	)
 }

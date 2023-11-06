@@ -91,11 +91,11 @@ const TextInput = ({
 	return (
 		<div className={`w-full ${boxClass}`} style={style}>
 			{/* 상단 라벨 영역 */}
-			<div className='flex flex-row justify-between items-center w-full'>
+			<div className='flex flex-row items-center justify-between w-full'>
 				{label && (
-					<span className={`flex flex-row items-start text-base text-neutral-800 font-medium`}>
+					<span className={`flex flex-row items-start text-lg text-neutral-800 font-medium`}>
 						{label}
-						{required && <span className='text-sm text-point-900'>&nbsp;*</span>}
+						{required && <span className='text-sm text-blue'>&nbsp;*</span>}
 					</span>
 				)}
 			</div>
@@ -103,14 +103,14 @@ const TextInput = ({
 			{/* 입력 구분에 따라 select/input 구분 + 에디터 boolean */}
 			<div className={`flex flex-row items-center relative`}>
 				{editable === true && edit === false ? (
-					<div className='flex flex-row items-center gap-4 cursor-pointer' onClick={() => setEdit(!edit)}>
+					<div className='flex flex-row items-center gap-4 cursor-pointer ' onClick={() => setEdit(!edit)}>
 						<span className={placeholderClass}>{value || placeholder}</span>
 					</div>
 				) : type === 'select' ? (
 					<Select
 						name={name}
 						value={value ? { value, label: value } : undefined}
-						className={`input input-select border-none ${(error && !focus && 'error') || ''}  ${inputClass || ''}`}
+						className={`input input-select border-none whitespace-nowrap ${(error && !focus && 'error') || ''}  ${inputClass || ''}`}
 						classNamePrefix={'select'}
 						onChange={(val: any) => onChange && onChange(val?.value)}
 						placeholder={placeholder}
@@ -147,7 +147,7 @@ const TextInput = ({
 					/>
 				)}
 
-				{rightIcon ? <div className='absolute right-4 h-full flex flex-col justify-center'>{rightIcon}</div> : undefined}
+				{rightIcon ? <div className='absolute flex flex-col justify-center h-full right-6'>{rightIcon}</div> : undefined}
 			</div>
 
 			{/* 하단 텍스트 영역 info/error 시 표출 */}

@@ -10,10 +10,10 @@ interface Props {
 
 const CheckBox = ({ text, check, setCheck, className }: Props) => {
 	return (
-		<div className={`w-full flex justify-between items-center cursor-pointer ${className}`}>
+		<div className={`w-full flex justify-between items-center cursor-pointer whitespace-nowrap ${className}`}>
 			<div className='flex flex-row grow items-center gap-[6px]' onClick={() => setCheck(!check)}>
 				<div>{check ? <CheckOn width={24} height={24} /> : <CheckOff width={24} height={24} />}</div>
-				<label className='text-sm text-main-900 font-normal cursor-pointer'>{text}</label>
+				<label className='text-sm font-normal cursor-pointer text-main-900'>{text}</label>
 			</div>
 		</div>
 	)
