@@ -1,6 +1,6 @@
 @layer base {
 	.input {
-		@apply w-full px-6 py-[18px] text-base text-main-900 font-normal leading-5 border-none bg-[#F4F6F8] rounded-full;
+		@apply w-full px-[24px] py-[1.6rem] md:py-[18px] text-base text-main-900 font-normal leading-5 border-none bg-[#F4F6F8] rounded-full;
 		@apply placeholder-[#ADB2BB] focus:ring-0 appearance-none outline-none focus:outline-none;
 
 		&.input-lg {
@@ -38,7 +38,7 @@
 	}
 
 	.input-textarea {
-		@apply border-0 bg-transparent scroll-hidden;
+		@apply border-0 bg-transparent scroll-hidden p-0;
 		@apply placeholder-[#ADB2BB] focus:ring-0 appearance-none outline-none focus:outline-none;
 	}
 
@@ -53,7 +53,7 @@
 		}
 
 		.select__control {
-			@apply px-4 py-[10px] shadow-none bg-[#F4F6F8] border border-transparent rounded-full cursor-pointer;
+			@apply px-2 md:px-4 py-1 md:py-3 shadow-none  bg-[#F4F6F8] border border-transparent rounded-full cursor-pointer;
 			&--is-focused {
 				@apply border-main-900;
 			}
@@ -64,8 +64,8 @@
 		}
 
 		.select__option {
-			@apply text-main-900 py-4 rounded-[28px] cursor-pointer;
-			
+			@apply text-main-900 py-7 rounded-[18px] cursor-pointer;
+
 			&--is-selected {
 				@apply font-bold px-5 bg-[#E7EDFD];
 			}
@@ -88,7 +88,7 @@
 		}
 
 		.select__menu {
-			@apply border border-main-900 rounded-[28px] mt-[6px];
+			@apply border border-main-900 rounded-[24px] mt-[6px];
 		}
 
 		.select__input {
@@ -102,7 +102,10 @@
 
 	.input-radio {
 		@apply w-[18px] h-[18px] text-[#202123] bg-[#202123] border border-[#676767] ring-0 focus:ring-0 hover:bg-[#333];
-		&:checked, &:checked:focus, &:checked:hover, &:checked:focus {
+		&:checked,
+		&:checked:focus,
+		&:checked:hover,
+		&:checked:focus {
 			@apply border border-[#676767];
 			background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 18 18' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='9' cy='9' r='6.5'/%3e%3c/svg%3e");
 		}
