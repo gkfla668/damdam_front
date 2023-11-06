@@ -13,7 +13,7 @@
 			min-height: 44px !important;
 		}
 
-		@apply w-full flex flex-col justify-center sticky px-4 border-b border-[#E5E8EC];
+		@apply w-full flex flex-col justify-center sticky px-8 border-b border-[#E5E8EC];
 		& > div {
 			@apply w-full flex flex-row justify-between items-center;
 		}

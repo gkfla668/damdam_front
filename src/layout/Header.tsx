@@ -39,7 +39,7 @@ export default function Header() {
 			<div className='w-full mx-auto lg:container'>
 				<div className='w-40 logo-box'>
 					<Link href='/'>
-						<LogoSVG height={isMobile ? 16 : 28} />
+						<LogoSVG height={isMobile ? 18 : 28} />
 					</Link>
 				</div>
 				{!isMobile && (
