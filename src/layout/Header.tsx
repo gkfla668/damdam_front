@@ -45,7 +45,7 @@ export default function Header() {
 				{!isMobile && (
 					<div className='flex flex-row items-start gap-24'>
 						<div className='relative cursor-pointer' onClick={onConfirmLogin}>
-							<MenuItem>학습</MenuItem>
+							<MenuItem className={`${curPath.includes('/study') ? 'text-blue' : 'text-[#383b40]'}`}>학습</MenuItem>
 							{curPath.includes('/study') && (
 								<>
 									<div className='w-full border-b-[3px] border-blue rounded-full' />
@@ -54,7 +54,7 @@ export default function Header() {
 							)}
 						</div>
 						<Link href='/topic' className='relative'>
-							<MenuItem>토픽</MenuItem>
+							<MenuItem className={`${curPath.includes('/topic') ? 'text-blue' : 'text-[#383b40]'}`}>토픽</MenuItem>
 							{curPath.includes('/topic') && (
 								<>
 									<div className='w-full border-b-[3px] border-blue rounded-full' />
@@ -63,7 +63,7 @@ export default function Header() {
 							)}
 						</Link>
 						<Link href='/debate' className='relative'>
-							<MenuItem>토론</MenuItem>
+							<MenuItem className={`${curPath.includes('/debate') ? 'text-blue' : 'text-[#383b40]'}`}>토론</MenuItem>
 							{curPath.includes('/debate') && (
 								<>
 									<div className='w-full border-b-[3px] border-blue rounded-full' />
@@ -95,7 +95,7 @@ export default function Header() {
 				<div className='flex flex-col gap-5'>
 					<div className='flex flex-row justify-between items-center mb-[10px]'>
 						<Link href='/' as='/'>
-							<LogoSVG height={isMobile ? 28 : 40} />
+							<LogoSVG height={isMobile ? 24 : 40} />
 						</Link>
 
 						<CloseSVG width={24} height={24} className='cursor-pointer' onClick={() => setModal(false)} />
@@ -135,6 +135,5 @@ export default function Header() {
 const MenuItem = styled.span`
 	font-size: 1.8rem;
 	font-weight: 900;
-	color: #383b40;
 	white-space: nowrap;
 `
