@@ -192,10 +192,10 @@ const Register = () => {
 								</div>
 							</div>
 						</div>
-						<div className='mt-[28px] md:mt-[36px]'>
+						{/* <div className='mt-[28px] md:mt-[36px]'>
 							<p className='font-extrabold md:text-[16px] text-[14px]'>건강한 토의토론 문자를 위해 본인인증 서비스를 실시하고 있습니다.</p>
-						</div>
-						<div className='w-full mt-[100px] mb-[16px] text-[#666666]'>
+						</div> */}
+						<div className='w-full mt-[3.6rem] mb-[2rem] text-[#666666]'>
 							<LargeButton text={'완료'} onClick={() => onSubmit()} />
 						</div>
 					</form>

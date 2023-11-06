@@ -41,7 +41,7 @@ const Signup = () => {
 
 	return (
 		<Layout>
-			<div className='container flex flex-col items-center  mt-[44px] md:mt-[88px] h-full'>
+			<div className='container flex flex-col items-center p-0  mt-[44px] md:mt-[88px] h-full'>
 				<div className='w-[320px] md:w-[840px] flex flex-col items-center'>
 					<TitleText className='mb-9 md:mb-10' title={'회원가입'} />
 					<div className='flex justify-start w-full mb-5 md:mb-6'>

@@ -63,7 +63,7 @@ const Login = () => {
 
 	return (
 		<Layout>
-			<div className='container flex flex-col items-center mx-auto mt-[88px] p-0 text-center w-[320px] md:w-[464px] h-full'>
+			<div className='container flex flex-col items-center mx-auto mt-[88px] text-center p-0 md:w-[464px] h-full'>
 				<TitleText title='로그인' />
 				<div className='w-full'>
 					<div className='mt-[48px] flex flex-col gap-4'>
