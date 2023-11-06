@@ -108,7 +108,7 @@ const Topic: NextPage<Props> = ({ status }: Props) => {
 
 	return (
 		<Layout>
-			<div className='container mx-auto mt-12 md:mt-13 md:mb-13 pb:12'>
+			<div className='container p-0 mx-auto mt-12 md:mt-13 md:mb-13 pb:12'>
 				<div className='flex flex-col items-center mb-16'>
 					<span className='mb-2 text-[2rem] font-extrabold md:text-[3.2rem] text-main-900'>토픽</span>
 					<span className='text-sm md:text-lg text-main-900'>토픽에 관한 다양한 의견을 확인해보세요.</span>
@@ -118,14 +118,14 @@ const Topic: NextPage<Props> = ({ status }: Props) => {
 					<MenuTab active={status} list={menu_list} onClick={(val) => goInterestedTopic(val)} className='pb-4 mb-8' />
 
 					<div className='flex flex-col flex-wrap justify-between w-full gap-3 md:flex-row'>
-						<div className='flex flex-row items-center gap-3 grow'>
+						<div className='flex items-center gap-3 grow'>
 							<TextInput
 								type='select'
 								placeholder='전체'
 								value={category}
 								onChange={(val: string) => setCategory(val)}
 								options={[{ label: '전체', value: '전체' }, ...DebateCategory.map((str) => ({ label: str, value: str }))]}
-								boxClass=' w-full md:min-w-[160px] md:max-w-[160px] '
+								boxClass='w-full md:min-w-[160px] md:max-w-[160px] '
 							/>
 							<TextInput
 								type='select'
