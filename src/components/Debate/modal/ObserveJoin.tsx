@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { LayoutContext } from 'context/Layout'
 
 import Modal from 'react-modal'
-import CharSVG from 'public/icons/dambi/floating_dambi.svg'
+import DambiSVG from 'public/icons/dambi/round_color_dambi.svg'
 import IconSVG from 'public/icons/orange_my_pc.svg'
 import IconMSVG from 'public/icons/orange_my_pc.svg'
 import PasswordModal from './Password'
@@ -31,8 +31,8 @@ const DebateObserveJoinModal = ({ open, password, onClose, onSubmit, className }
 			border: 0,
 			radius: 12,
 			width: '100%',
-			minWidth: device === 'desktop' ? 396 : 0,
-			maxWidth: 640,
+			minWidth: device === 'desktop' ? 396 : 320,
+			maxWidth: 320,
 			height: 'auto',
 			maxHeight: '100vh',
 			overflow: 'auto',
@@ -57,7 +57,7 @@ const DebateObserveJoinModal = ({ open, password, onClose, onSubmit, className }
 				<div className='w-[-webkit-fill-available] p-10 bg-white rounded-t-lg'>
 					<div className='flex flex-col items-center'>
 						<div className='relative mb-6'>
-							<CharSVG width={char_size} height={char_size} />
+							<DambiSVG width={char_size} height={char_size} />
 							{device === 'mobile' ? (
 								<IconMSVG width={32} height={32} className='absolute -right-1 -bottom-1' />
 							) : (
