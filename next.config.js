@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const API = process.env.API
+const API = process.env.NEXT_PUBLIC_API
 
 const path = require('path') // 1. path 선언
 const nextConfig = {
