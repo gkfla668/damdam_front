@@ -6,6 +6,7 @@ import Modal from 'react-modal'
 //-assets
 import LogoSVG from 'public/app/full_logo.svg'
 import CharSVG from 'public/icons/btn_profile_pc.svg'
+import ProfileColorSVG from 'public/icons/btn_profile_color_pc.svg'
 import MenuSVG from 'public/icons/btn_menu_m.svg'
 import CloseSVG from 'public/icons/btn_exit_black.svg'
 import NavPointSVG from 'public/icons/gnb_point.svg'
@@ -13,6 +14,7 @@ import NavPointSVG from 'public/icons/gnb_point.svg'
 import styled from 'styled-components'
 import { useAuth } from 'utils/hooks/useAuth'
 import LoginModal from 'components/common/LoginModal'
+import { toast } from 'react-toastify'
 
 export default function Header() {
 	const { device } = useContext(LayoutContext)
@@ -28,10 +30,18 @@ export default function Header() {
 
 	const [loginModal, setLoginModal] = useState<boolean>(false)
 
+	const [iconModal, setIconModal] = useState(false)
+
 	const onConfirmLogin = () => {
 		if (!loggedIn) return setLoginModal(true)
 
 		router.push('/study')
+	}
+
+	const { logout } = useAuth()
+	const handleLogout = () => {
+		logout()
+		return toast('로그아웃 성공')
 	}
 
 	return (
@@ -74,9 +84,17 @@ export default function Header() {
 					</div>
 				)}
 
-				<div className='flex flex-row justify-end w-40 cursor-pointer hover:drop-shadow-md hover:scale-105 hover:transition-all active:drop-shadow-sm'>
-					{isMobile && <MenuSVG width={24} height={24} onClick={() => setModal(true)} />}
-					<Link href={'/login'}> {!isMobile && <CharSVG width={36} height={36} />}</Link>
+				<div className='flex items-center justify-end w-40 cursor-pointer'>
+					{isMobile ? (
+						<MenuSVG width={24} height={24} onClick={() => setModal(true)} />
+					) : (
+						<div className='relative flex flex-col items-center justify-center ralative drop-shadow-lg active:drop-shadow-sm'>
+							<div onClick={() => setIconModal(!iconModal)}>{loggedIn ? <ProfileColorSVG /> : <CharSVG width={36} height={36} />}</div>
+							{iconModal && (
+								<Bubble onClick={!loggedIn ? () => router.push('/login') : handleLogout}>{!loggedIn ? '로그인' : '로그아웃'}</Bubble>
+							)}
+						</div>
+					)}
 				</div>
 			</div>
 
@@ -114,15 +132,17 @@ export default function Header() {
 						<Link href='/debate'>
 							<span className='block w-full py-4 text-base font-extrabold text-main-900'>토론</span>
 						</Link>
-						{!loggedIn ? (
-							<Link href='/login'>
-								<span className='block w-full py-4 text-base font-extrabold text-blue'>로그인</span>
-							</Link>
-						) : (
-							<Link href='/'>
-								<span className='block w-full py-4 text-base font-extrabold text-main-900'>마이</span>
-							</Link>
-						)}
+						<div className='border-t-[1px] border-gray  pt-1'>
+							{!loggedIn ? (
+								<Link href='/login'>
+									<span className='block w-full py-4 text-sm font-extrabold text-blue'>로그인</span>
+								</Link>
+							) : (
+								<div onClick={handleLogout}>
+									<span className='block w-full py-4 text-sm font-extrabold text-main-900'>로그아웃</span>
+								</div>
+							)}
+						</div>
 					</div>
 				</div>
 			</Modal>
@@ -136,4 +156,17 @@ const MenuItem = styled.span`
 	font-size: 1.8rem;
 	font-weight: 900;
 	white-space: nowrap;
+`
+
+const Bubble = styled.button`
+	position: absolute;
+	right: 5rem;
+	border: 1px solid #324478;
+	margin-top: 0.4rem;
+	border-radius: 0.8em;
+
+	padding: 0.5rem 2.4rem;
+	white-space: nowrap;
+	font-size: 1.2rem;
+	font-weight: 800;
 `
