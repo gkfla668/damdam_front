@@ -4,7 +4,7 @@ import axios from 'axios'
 import authConfig from 'config/auth'
 
 export const setToken = (token: string) => localStorage.setItem(authConfig.storageTokenKeyName, token)
-export const getToken = () => localStorage.getItem(authConfig.storageTokenKeyName)
+export const getToken = () => typeof window !== 'undefined' && localStorage.getItem(authConfig.storageTokenKeyName)
 export const removeToken = () => localStorage.removeItem(authConfig.storageTokenKeyName)
 export const setRefreshToken = (token: string) => localStorage.setItem(authConfig.onTokenExpiration, token)
 export const getRefreshToken = () => localStorage.getItem(authConfig.onTokenExpiration)
