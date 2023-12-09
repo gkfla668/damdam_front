@@ -14,17 +14,12 @@ import LoginModal from 'components/common/LoginModal'
 import { useAuth } from 'utils/hooks/useAuth'
 import { LayoutContext } from 'context/Layout'
 
-export interface ITopicData {
-	id: number
-	category: TDebateCategory[]
-	title: string
-	liked: boolean
-	views: number
-	comments: number
-}
+import { ITopicToJSON } from 'types/topic/info'
+
+import { API } from 'pages/api/api'
 
 interface Props {
-	data: ITopicData
+	data: ITopicToJSON
 	column?: number
 	gap?: number
 	onClick: any
@@ -40,8 +35,31 @@ const TopicItemCard = ({ data, column = 4, gap = 40, onClick }: Props) => {
 	const { device } = useContext(LayoutContext)
 	const isMobile = device === 'mobile'
 
-	const handleLikeClick = () => {
+	const handleLikeClick = async () => {
 		if (!loggedIn) return setModal(true)
+
+		const topicId = data?.id
+
+		if (!isLiked) {
+			API.post(`/topic/${topicId}/likes`, {
+				withCredentials: true,
+			})
+				.then(() => {})
+				.catch((error) => {
+					console.error('API 요청 중 오류 발생:', error)
+					throw error
+				})
+		} else {
+			try {
+				const response = await API.delete(`/topic/${topicId}/likes`)
+				if (response.status !== 200) {
+					alert('좋아요 취소에 실패하였습니다')
+					console.error('좋아요 취소 실패')
+				}
+			} catch (error) {
+				console.error('API 요청 중 오류 발생:', error)
+			}
+		}
 
 		setIsLiked(!isLiked)
 	}
@@ -53,7 +71,7 @@ const TopicItemCard = ({ data, column = 4, gap = 40, onClick }: Props) => {
 				width: `calc(${100 / column}% - ${gap}px + ${gap / column}px)`,
 			}}
 		>
-			{data.id <= 6 && (
+			{Number(data.id) <= 6 && (
 				<div className='absolute left-7 md:left-10 -top-8'>
 					<HotSVG />
 				</div>
@@ -68,11 +86,11 @@ const TopicItemCard = ({ data, column = 4, gap = 40, onClick }: Props) => {
 				<div className='flex gap-[1rem] md:gap-[1.4rem]'>
 					<div className='flex items-center justify-center gap-1 md:gap-2'>
 						<ViewsSVG />
-						<p className='text-xs md:text-sm text-main-900'>{data?.views.toLocaleString('ko-KR')}</p>
+						<p className='text-xs md:text-sm text-main-900'>{Number(data?.views).toLocaleString('ko-KR')}</p>
 					</div>
 					<div className='flex items-center justify-center gap-1 md:gap-2'>
 						<CommentsSVG />
-						<p className='text-xs md:text-sm text-main-900'>{data?.comments.toLocaleString('ko-KR')}</p>
+						<p className='text-xs md:text-sm text-main-900'>{Number(data?.comments).toLocaleString('ko-KR')}</p>
 					</div>
 				</div>
 			</div>

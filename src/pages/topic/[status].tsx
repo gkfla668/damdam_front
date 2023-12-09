@@ -16,11 +16,12 @@ import TopicItemCard from 'components/Topic/Card'
 import LoginModal from 'components/common/LoginModal'
 //-assets
 import SearchSVG from 'public/icons/btn_search.svg'
+import DambiSVG from 'public/icons/dambi/round_gray_dambi.svg'
 //-types
-import { DebateCategory } from 'types/debate/info'
+import { ITopicToJSON, TopicCategory } from 'types/topic/info'
 
 //-data
-import { topicList } from 'data/topicDummyData'
+import { API } from 'pages/api/api'
 
 interface Props {
 	status: string
@@ -54,19 +55,55 @@ const Topic: NextPage<Props> = ({ status }: Props) => {
 	const [filter, setFilter] = useState<string>('최신순')
 	const [search, setSearch] = useState<string>('')
 
-	const [list, setList] = useState(topicList)
+	const [list, setList] = useState<ITopicToJSON>()
 
 	const [modal, setModal] = useState<boolean>(false)
 
-	/** 최신순/인기순 필터링 */
+	/** 토픽, 관심 토픽 리스트 가져오는 API */
 	useEffect(() => {
-		if (filter === '최신순') return setList([...list].sort((a, b) => a.id - b.id)) // 기존 값에 영향이 가지 않도록 spread 연산자 사용
-		return setList([...list].sort((a, b) => b.views + b.comments - a.views + a.comments))
-	}, [filter])
+		if (status === '관심 토픽') {
+			API.get(`/topic/myLikes`)
+				.then((res) => {
+					console.log(res)
+					setList(res.data.data)
+				})
+				.catch((error) => {
+					console.error('API 요청 중 오류 발생:', error)
+					throw error
+				})
+		} else {
+			API.get(`/topic/dashboard`)
+				.then((res) => {
+					console.log(res)
+					setList(res.data.data)
+				})
+				.catch((error) => {
+					console.error('API 요청 중 오류 발생:', error)
+					throw error
+				})
+		}
+	}, [status])
+
+	// /** 최신순/인기순 필터링 */
+	// useEffect(() => {
+	// 	if (filter === '최신순') return setList([...list].sort((a, b) => a.id - b.id)) // 기존 값에 영향이 가지 않도록 spread 연산자 사용
+	// 	return setList([...list].sort((a, b) => b.views + b.comments - a.views + a.comments))
+	// }, [filter])
 
 	/** 검색 필터링 */
 	useEffect(() => {
-		return setList([...topicList].filter((topic) => topic.title.includes(search)))
+		if (search.length > 0) {
+			console.log(search, category)
+			API.get(`/topic/search?search=${search}&category=${category}`)
+				.then((res) => {
+					console.log(res)
+					setList(res.data.data)
+				})
+				.catch((error) => {
+					console.error('API 요청 중 오류 발생:', error)
+					throw error
+				})
+		}
 	}, [search])
 
 	const goInterestedTopic = (val: string) => {
@@ -77,6 +114,16 @@ const Topic: NextPage<Props> = ({ status }: Props) => {
 
 	const goTopicFeedPage = (topicId: number) => {
 		if (!loggedIn) return setModal(true)
+
+		API.put(`/topic/${topicId}/hit`)
+			.then(() => {
+				console.log('조회수 증가 성공')
+			})
+			.catch((error) => {
+				console.error('API 요청 중 오류 발생:', error)
+				throw error
+			})
+
 		router.push(`/topic/room/${topicId}`)
 	}
 
@@ -91,10 +138,21 @@ const Topic: NextPage<Props> = ({ status }: Props) => {
 		dispatch(DebateAction.Search({ ...body, page: 0, perPage: 12 }))
 	}
 
+	const NoResult = () => (
+		<div className='flex flex-col items-center w-full gap-6 mt-8 mb-20'>
+			<DambiSVG width={100} height={100} />
+			<span className='text-base font-normal text-center text-main-900'>
+				해당하는 토픽이 없습니다.
+				<br />
+			</span>
+		</div>
+	)
+
 	const Dashboard = () => {
 		return (
 			<div className='flex flex-col '>
 				<div className='flex flex-wrap gap-[4rem] mt-12 mb-16'>
+					{list?.length === 0 && <NoResult />}
 					{list?.map(
 						(obj) =>
 							(category === obj.category || category === '전체') && (
@@ -124,7 +182,7 @@ const Topic: NextPage<Props> = ({ status }: Props) => {
 								placeholder='전체'
 								value={category}
 								onChange={(val: string) => setCategory(val)}
-								options={[{ label: '전체', value: '전체' }, ...DebateCategory.map((str) => ({ label: str, value: str }))]}
+								options={[{ label: '전체', value: '전체' }, ...TopicCategory.map((str) => ({ label: str, value: str }))]}
 								boxClass='w-full md:min-w-[160px] md:max-w-[160px] '
 							/>
 							<TextInput

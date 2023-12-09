@@ -19,6 +19,10 @@ const UserId = styled.p`
 	color: #383b40;
 	line-height: 22px;
 	letter-spacing: -1px;
+
+	@media screen and (max-width: 768px) {
+		font-size: 1.2rem;
+	}
 `
 const Comment = styled.p`
 	font-weight: 400;
@@ -27,6 +31,10 @@ const Comment = styled.p`
 	letter-spacing: -1px;
 
 	color: #383b40;
+
+	@media screen and (max-width: 768px) {
+		font-size: 1.2rem;
+	}
 `
 
 const Time = styled.p`
