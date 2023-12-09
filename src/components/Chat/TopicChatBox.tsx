@@ -6,44 +6,24 @@ import parse from 'html-react-parser'
 
 import FloatingDambiSVG from 'public/icons/dambi/round_color_dambi.svg'
 
-import { IDebateChatToJSON, IDebateRoomToJSON } from 'types/debate/info'
+import { ITopicChatToJSON, ITopicRoomToJSON } from 'types/topic/info'
 import TopicItem from 'components/Topic/Item'
 
 interface Props {
-	room?: IDebateRoomToJSON
-	chat: IDebateChatToJSON[]
+	room?: ITopicRoomToJSON
+	chat: ITopicChatToJSON[]
 	input?: boolean
 	children?: JSX.Element
 	type?: string
 	className?: string
 }
 
-const DebateChatBox = ({ room, chat, input, children, type, className }: Props) => {
+const TopicChatBox = ({ room, chat, input, children, type, className }: Props) => {
 	const chatRef = useRef<HTMLDivElement>(null)
 	const { user } = useAuth()
 	const [data, setData] = useState<any>([])
 
-	const Message = ({
-		type,
-		time,
-		name,
-		message,
-		prevSystem,
-	}: {
-		type: 'my' | 'other' | 'system'
-		time: any
-		name: string
-		message: any
-		prevSystem: boolean
-	}) => {
-		if (type === 'system')
-			return (
-				<div className={`w-full flex flex-col justify-center items-center text-center ${prevSystem ? 'mt-0' : 'mt-10'}`}>
-					{!prevSystem && <FloatingDambiSVG width={100} height={100} className='mb-6' />}
-					<div>{parse(message)}</div>
-				</div>
-			)
-
+	const Message = ({ type, time, name, message }: { type: 'my' | 'other'; time: any; name: string; message: any }) => {
 		if (type === 'my')
 			return (
 				<div className='flex flex-col items-end w-full mt-5' key={makeUUID()}>
@@ -83,17 +63,13 @@ const DebateChatBox = ({ room, chat, input, children, type, className }: Props) 
 			const cur = chat[i]
 
 			//- check types
-			const type = user?.id === cur.authorId ? 'my' : cur.authorId === undefined ? 'system' : 'other'
+			const type = user?.id === cur.authorId ? 'my' : 'other'
 			const date = moment(cur.createdAt).format('YYYY년 MM월 DD일')
 			const time = moment(cur.createdAt).format('a hh:mm')
 
-			const user_group = prev?.authorId === cur.authorId
-			const prev_system = prev?.authorId === cur.authorId && cur?.authorId === undefined
-			const user_time_group = user_group && moment(prev.createdAt).format('YYYY.MM.DD') === moment(cur.createdAt).format('YYYY.MM.DD')
-			const next_time_group = next?.authorId === cur.authorId && time === moment(next.createdAt).format('a hh:mm')
 			const day_diff = prev && moment(prev.createdAt).format('MM.DD') != moment(cur.createdAt).format('MM.DD')
 
-			result.push({ name: cur.name, message: cur.message, type, date, time, prev_system, user_time_group, next_time_group, day_diff })
+			result.push({ name: cur.name, message: cur.message, type, date, time, day_diff })
 		}
 
 		setData(result)
@@ -116,15 +92,13 @@ const DebateChatBox = ({ room, chat, input, children, type, className }: Props) 
 	}, [input, user])
 
 	const chatJSX = useMemo(() => {
-		return data.map((cur: any) => (
-			<Message type={cur?.type} name={cur?.name} message={cur?.message} time={cur?.time} prevSystem={cur?.prev_system} key={makeUUID()} />
-		))
+		return data.map((cur: any) => <Message type={cur?.type} name={cur?.name} message={cur?.message} time={cur?.time} key={makeUUID()} />)
 	}, [data, room])
 
 	return (
 		<div
 			ref={chatRef}
-			className={`relative flex flex-col justify-center items-center max-h-screen overflow-y-scroll scroll-hidden bg-[#F4F6F8] ${className} `}
+			className={`relative flex flex-col justify-start items-center max-h-screen overflow-y-scroll scroll-hidden bg-[#F4F6F8] ${className} `}
 		>
 			{type === 'ai' && (
 				<div className='flex flex-col items-center justify-center'>
@@ -145,4 +119,4 @@ const DebateChatBox = ({ room, chat, input, children, type, className }: Props) 
 	)
 }
 
-export default DebateChatBox
+export default TopicChatBox
