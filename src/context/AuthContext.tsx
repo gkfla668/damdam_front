@@ -159,7 +159,7 @@ const AuthProvider = ({ children }: Props) => {
 		removeToken()
 		removeRefreshToken()
 		window.localStorage.removeItem('userData')
-		router.push('/auth/login')
+		router.push('/login')
 	}
 
 	const values = {
