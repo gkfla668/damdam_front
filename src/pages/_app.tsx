@@ -6,7 +6,7 @@ import { LayoutProvider } from 'context/Layout'
 import { SocketProvider } from 'context/Socket'
 import { ToastContainer } from 'react-toastify'
 import { Provider } from 'react-redux'
-import { store } from 'redux/store'
+import { store } from '../redux/store'
 
 import Meta from 'components/common/Meta'
 //-moment 처리

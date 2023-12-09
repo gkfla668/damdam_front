@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 
 import storage from 'redux-persist/lib/storage'
-import rootReducer from 'redux/rootReducer'
+import rootReducer from '../redux/rootReducer'
 
 // redux-persist whiteList처리. auth 스토리지는 계속 유지하도록
 const persistConfig = {

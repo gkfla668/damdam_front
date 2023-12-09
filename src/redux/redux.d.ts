@@ -1,7 +1,7 @@
 import 'redux'
 import { ThunkAction } from 'redux-thunk'
 import { AnyAction } from 'redux'
-import { RootState } from 'redux/store'
+import { RootState } from '../redux/store'
 
 declare module 'redux' {
 	export interface Dispatch<A extends Action = AnyAction> {
