@@ -150,7 +150,7 @@ const DebateChatRoomPage: NextPage<Props> = ({ debateId }: Props) => {
 				},
 			}}
 		>
-			<div className={`${device !== 'mobile' ? 'w-[50vw]' : 'w-[100vw'} h-[100%] flex flex-col`}>
+			<div className={`${device !== 'mobile' ? 'w-[50vw]' : 'w-[100vw]'} h-[100%] flex flex-col`}>
 				<div className='container mx-auto my-[1.4rem] md:my-[2.4rem]'>
 					<div className='relative flex flex-col items-center'>
 						<div className='absolute left-0 cursor-pointer top-2' onClick={() => router.back()}>

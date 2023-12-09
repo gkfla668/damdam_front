@@ -180,6 +180,7 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 		<div className='flex flex-col'>
 			<div className='flex flex-row flex-wrap gap-10'>
 				{!data?.length && <NoResult />}
+
 				{data?.map((obj) => (
 					<DebateItemCard key={obj.id} column={device !== 'desktop' ? 1 : 3} data={obj} onClick={() => goDebateDetailPage(obj.id)} />
 				))}
@@ -199,7 +200,7 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 					<MenuTab active={status} onClick={(val) => router.push(`/debate/${val}`)} list={menu_list} className='pb-4 mb-8' />
 
 					<div className='flex flex-col flex-wrap justify-between gap-3 mb-12 md:flex-row'>
-						<div className='flex items-center justify-between gap-3 grow'>
+						<div className='flex items-center gap-3 grow'>
 							<TextInput
 								type='select'
 								placeholder='전체'
@@ -236,7 +237,7 @@ const DebateSearchPage: NextPage<Props> = ({ status }: Props) => {
 								boxClass='w-full md:w-[320px]'
 							/>
 
-							<button className='w-full btn md:w-fit' onClick={goAddPage}>
+							<button className='w-full btn md:w-fit py-[1.3rem]' onClick={goAddPage}>
 								토론 개설하기
 							</button>
 						</div>
