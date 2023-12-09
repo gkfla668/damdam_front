@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import Modal from 'react-modal'
 import { LayoutContext } from 'context/Layout'
 
-import DambiSVG from 'public/icons/dambi/floating_dambi.svg'
+import DambiSVG from 'public/icons/dambi/round_color_dambi.svg'
 import LockSVG from 'public/icons/orange_lock_pc.svg'
 
 import LargeButton from 'components/Button/Large'
