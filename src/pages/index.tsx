@@ -68,7 +68,7 @@ const IndexPage: NextPage = () => {
 						<TopicItem title={"'중대재해법' 근로자 사고 줄일 수 있는가? 🚧"} onClick={() => onConfirmLogin('10')} isHome={true} />
 					</ul>
 
-					<div className='my-9'>
+					<div className='my-[2.4rem] md:my-[3.2rem]'>
 						<Link href='/topic'>
 							<LargeButton text={'토픽 더보기'} />
 						</Link>
