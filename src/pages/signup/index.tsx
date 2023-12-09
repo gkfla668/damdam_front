@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import styled from 'styled-components'
 import Layout from 'layout'
 
@@ -7,6 +7,7 @@ import DroptopSVG from 'public/icons/btn_arrow_top.svg'
 
 import LargeButton from 'components/Button/Large'
 import TitleText from 'components/common/TitleText'
+import { LayoutContext } from 'context/Layout'
 
 const Signup = () => {
 	const [checkItems, setCheckItems] = useState<Array<string>>([])
@@ -14,6 +15,9 @@ const Signup = () => {
 
 	const [firstClick, setFirstClick] = useState(false)
 	const [secondClick, setSecondClick] = useState(false)
+
+	const { device } = useContext(LayoutContext)
+	const isMobile = device === 'mobile'
 
 	const handleAllCheck = (checked: boolean) => {
 		setIsAllChecked((isAllchecked) => !isAllchecked)
@@ -43,16 +47,16 @@ const Signup = () => {
 		<Layout>
 			<div className='container flex flex-col items-center p-0  mt-[44px] md:mt-[88px] h-full'>
 				<div className='w-[320px] md:w-[840px] flex flex-col items-center'>
-					<TitleText className='mb-9 md:mb-10' title={'회원가입'} />
-					<div className='flex justify-start w-full mb-5 md:mb-6'>
-						<p className='w-[60vw] font-bold text-sm md:text-lg'>
-							담담에 오신 것을 환영합니다. <br /> 온라인 토의/토론 서비스 이용을 위하여 아래의 약관 동의가 필요합니다.
+					<TitleText className='mb-[4rem] md:mb-[8rem]]' title={'회원가입'} />
+					<div className='flex justify-start w-full mb-8 md:mb-10'>
+						<p className='text-sm font-bold leading-6 md:leading-8 md:text-lg'>
+							담담에 오신 것을 환영합니다. <br /> 온라인 토의/토론 서비스 이용을 위하여 {isMobile && <br />}아래의 약관 동의가 필요합니다.
 						</p>
 					</div>
 
 					<form action='/signup/register' id='signupForm' className='flex flex-col items-start w-full'>
 						{/** 전체동의 체크박스 */}
-						<div className=' w-full flex items-center gap-2 py-4 border-y-[1px] border-y-[#e5e8ec]'>
+						<div className=' w-full flex items-center gap-4 py-4 border-y-[1px] border-y-[#e5e8ec]'>
 							<Input id='all' type='checkbox' checked={checkItems.length >= 2} onChange={(e) => handleAllCheck(e.target.checked)} />
 							<Label htmlFor='all'>전체동의</Label>
 						</div>
@@ -60,7 +64,7 @@ const Signup = () => {
 							{/** 담담 서비스 이용약관 체크박스 */}
 							<div>
 								<div className='flex justify-between'>
-									<div className='flex items-center gap-2'>
+									<div className='flex items-center gap-4'>
 										<Input
 											required
 											id='first'
@@ -291,7 +295,7 @@ const Signup = () => {
 							{/** 개인정보 수집 및 이용 동의서 체크박스 */}
 							<div className='border-b-[1px] border-b-[#e5e8ec]'>
 								<div className='flex justify-between'>
-									<div className='flex items-center gap-2 pb-6'>
+									<div className='flex items-center gap-4 pb-6'>
 										<Input
 											required
 											id='second'

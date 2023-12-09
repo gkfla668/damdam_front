@@ -113,7 +113,7 @@ const Register = () => {
 		<Layout>
 			<div className='flex flex-col items-center justify-center mt-[44px] md:mt-[88px]'>
 				<div className='w-[320px] md:w-[640px] flex flex-col justify-center items-center'>
-					<TitleText className='md:mb-10' title={'회원가입'} />
+					<TitleText className='mb-[4rem] md:mb-10' title={'회원가입'} />
 					<form className='w-full'>
 						<div>
 							<S.InputWrapper>
@@ -181,7 +181,7 @@ const Register = () => {
 								/>
 								<S.MessageText>{dateOfBirthCheckMsg}</S.MessageText>
 							</S.InputWrapper>
-							<div className='pb-[28px] md:pb-[36px] border-b-[1px] border-b-[#D8D8D8] flex flex-col gap-2'>
+							<div className='pb-[24px] md:pb-[36px] border-b-[1px] border-b-[#D8D8D8] flex flex-col gap-2'>
 								<S.InputLabel htmlFor='gender'>성별</S.InputLabel>
 								<div className='flex gap-3'>
 									<FormRadioInput onChange={() => setSex('woman')} type='radio' id='radio-1' name='gender' value='woman' checked />
@@ -195,7 +195,7 @@ const Register = () => {
 						{/* <div className='mt-[28px] md:mt-[36px]'>
 							<p className='font-extrabold md:text-[16px] text-[14px]'>건강한 토의토론 문자를 위해 본인인증 서비스를 실시하고 있습니다.</p>
 						</div> */}
-						<div className='w-full mt-[3.6rem] mb-[2rem] text-[#666666]'>
+						<div className='w-full mt-[2.4rem] md:mt-[3.6rem] mb-[2rem] text-[#666666]'>
 							<LargeButton text={'완료'} onClick={() => onSubmit()} />
 						</div>
 					</form>

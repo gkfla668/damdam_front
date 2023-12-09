@@ -30,35 +30,12 @@ const Login = () => {
 
 	const { login } = useAuth()
 
-	// const apiInstance = axios.create({
-	// 	baseURL: process.env.NEXT_PUBLIC_API,
-	// 	headers: {
-	// 		'Content-Type': 'application/json',
-	// 		// 다른 헤더 설정
-	// 	},
-	// })
-
 	const onSubmit = async () => {
 		const userData = {
 			identity: identity,
 			password: password,
 		}
 		login(userData)
-		// try {
-		// 	const response = await apiInstance.post('/auth/login', JSON.stringify(userData))
-		// 	if (response.status === 200) {
-		// 		alert('로그인에 성공하였습니다.')
-		// 		console.log(response)
-		// 		setRefCookie('refreshToken', response.data.data.accessToken)
-		// 		setAccCookie('accessToken', response.data.data.refreshToken)
-		// 		router.push('/')
-		// 	} else {
-		// 		alert('로그인 실패')
-		// 		console.error('로그인 실패')
-		// 	}
-		// } catch (error) {
-		// 	console.error('API 요청 중 오류 발생:', error)
-		// }
 	}
 
 	return (
@@ -85,19 +62,19 @@ const Login = () => {
 							maxLength={16}
 						/>
 					</div>
-					<div className='w-full mt-6'>
+					<div className='w-full mt-8'>
 						<LargeButton text={'로그인하기'} onClick={onSubmit} />
 					</div>
 				</div>
 
-				<div className='flex gap-2 mt-3'>
+				<div className='flex gap-2 mt-4'>
 					<span className='text-[1.3rem] md:text-base text-[#666666]'>아직 회원이 아니신가요?</span>
 					<button onClick={() => router.push('/signup')} className='text-blue text-[1.3rem] md:text-base font-extrabold'>
 						회원가입
 					</button>
 				</div>
 
-				<div className='flex w-full gap-4 mt-10'>
+				<div className='flex w-full gap-4 mt-16'>
 					<S.FindButton onClick={() => router.push('/preparation')}>아이디 찾기</S.FindButton>
 					<S.FindButton onClick={() => router.push('/preparation')}>비밀번호 찾기</S.FindButton>
 				</div>
@@ -120,7 +97,7 @@ const Input = styled.input`
 	}
 
 	@media screen and (max-width: 768px) {
-		font-size: 1rem;
+		font-size: 1.2rem;
 		padding: 1.2rem 2rem;
 	}
 `
