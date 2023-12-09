@@ -16,7 +16,7 @@ module.exports = {
 			padding: 20,
 			screens: {
 				sm: '640px',
-				md: '768px',
+				md: '768px' /** 모바일 기기의 가로 최대 사이즈 */,
 				lg: '1024px',
 				xl: '1280px',
 				'2xl': '1280px',
@@ -53,6 +53,13 @@ module.exports = {
 				blue: '#324478',
 				orange: '#ED7743',
 			},
+		},
+		fontSize: {
+			xs: '1rem',
+			sm: '1.2rem',
+			base: '1.4rem',
+			lg: '1.6rem',
+			xl: '1.8rem',
 		},
 	},
 }
