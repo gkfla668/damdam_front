@@ -3,8 +3,8 @@ import type { NextPage, NextPageContext } from 'next'
 import { useRouter } from 'next/router'
 
 import { useContext, useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from 'redux/hook'
-import { DebateAction } from 'redux/module/debate'
+import { useAppDispatch, useAppSelector } from '../../redux/hook'
+import { DebateAction } from '../../redux/module/debate'
 import { useAuth } from 'utils/hooks/useAuth'
 //-modules
 import { LayoutContext } from 'context/Layout'
@@ -55,7 +55,7 @@ const Topic: NextPage<Props> = ({ status }: Props) => {
 	const [filter, setFilter] = useState<string>('최신순')
 	const [search, setSearch] = useState<string>('')
 
-	const [list, setList] = useState<ITopicToJSON>()
+	const [list, setList] = useState<ITopicToJSON>([])
 
 	const [modal, setModal] = useState<boolean>(false)
 

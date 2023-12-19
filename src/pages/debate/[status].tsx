@@ -2,8 +2,8 @@ import type { NextPage, NextPageContext } from 'next'
 //-next
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from 'redux/hook'
-import { DebateAction } from 'redux/module/debate'
+import { useAppDispatch, useAppSelector } from '../../redux/hook'
+import { DebateAction } from '../../redux/module/debate'
 import { useAuth } from 'utils/hooks/useAuth'
 
 //-Components
