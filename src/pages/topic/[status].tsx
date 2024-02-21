@@ -55,34 +55,34 @@ const Topic: NextPage<Props> = ({ status }: Props) => {
 	const [filter, setFilter] = useState<string>('최신순')
 	const [search, setSearch] = useState<string>('')
 
-	const [list, setList] = useState<ITopicToJSON>([])
+	const [list, setList] = useState<ITopicToJSON[]>([])
 
 	const [modal, setModal] = useState<boolean>(false)
 
 	/** 토픽, 관심 토픽 리스트 가져오는 API */
-	useEffect(() => {
-		if (status === '관심 토픽') {
-			API.get(`/topic/myLikes`)
-				.then((res) => {
-					console.log(res)
-					setList(res.data.data)
-				})
-				.catch((error) => {
-					console.error('API 요청 중 오류 발생:', error)
-					throw error
-				})
-		} else {
-			API.get(`/topic/dashboard`)
-				.then((res) => {
-					console.log(res)
-					setList(res.data.data)
-				})
-				.catch((error) => {
-					console.error('API 요청 중 오류 발생:', error)
-					throw error
-				})
-		}
-	}, [status])
+	// useEffect(() => {
+	// 	if (status === '관심 토픽') {
+	// 		API.get(`/topic/myLikes`)
+	// 			.then((res) => {
+	// 				console.log(res)
+	// 				setList(res.data.data)
+	// 			})
+	// 			.catch((error) => {
+	// 				console.error('API 요청 중 오류 발생:', error)
+	// 				throw error
+	// 			})
+	// 	} else {
+	// 		API.get(`/topic/dashboard`)
+	// 			.then((res) => {
+	// 				console.log(res)
+	// 				setList(res.data.data)
+	// 			})
+	// 			.catch((error) => {
+	// 				console.error('API 요청 중 오류 발생:', error)
+	// 				throw error
+	// 			})
+	// 	}
+	// }, [status])
 
 	// /** 최신순/인기순 필터링 */
 	// useEffect(() => {
@@ -91,20 +91,20 @@ const Topic: NextPage<Props> = ({ status }: Props) => {
 	// }, [filter])
 
 	/** 검색 필터링 */
-	useEffect(() => {
-		if (search.length > 0) {
-			console.log(search, category)
-			API.get(`/topic/search?search=${search}&category=${category}`)
-				.then((res) => {
-					console.log(res)
-					setList(res.data.data)
-				})
-				.catch((error) => {
-					console.error('API 요청 중 오류 발생:', error)
-					throw error
-				})
-		}
-	}, [search])
+	// useEffect(() => {
+	// 	if (search.length > 0) {
+	// 		console.log(search, category)
+	// 		API.get(`/topic/search?search=${search}&category=${category}`)
+	// 			.then((res) => {
+	// 				console.log(res)
+	// 				setList(res.data.data)
+	// 			})
+	// 			.catch((error) => {
+	// 				console.error('API 요청 중 오류 발생:', error)
+	// 				throw error
+	// 			})
+	// 	}
+	// }, [search])
 
 	const goInterestedTopic = (val: string) => {
 		if (val === '관심 토픽' && !loggedIn) return setModal(true)
@@ -142,7 +142,7 @@ const Topic: NextPage<Props> = ({ status }: Props) => {
 		<div className='flex flex-col items-center w-full gap-6 mt-8 mb-20'>
 			<DambiSVG width={100} height={100} />
 			<span className='text-base font-normal text-center text-main-900'>
-				해당하는 토픽이 없습니다.
+				준비 중입니다.
 				<br />
 			</span>
 		</div>
@@ -156,7 +156,12 @@ const Topic: NextPage<Props> = ({ status }: Props) => {
 					{list?.map(
 						(obj) =>
 							(category === obj.category || category === '전체') && (
-								<TopicItemCard key={obj.id} column={device !== 'desktop' ? 1 : 3} data={obj} onClick={() => goTopicFeedPage(obj.id)} />
+								<TopicItemCard
+									key={obj.id}
+									column={device !== 'desktop' ? 1 : 3}
+									data={obj}
+									onClick={() => goTopicFeedPage(Number(obj.id))}
+								/>
 							),
 					)}
 				</div>

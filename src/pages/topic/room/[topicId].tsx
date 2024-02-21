@@ -45,7 +45,6 @@ const TopicFeedRoomPage: NextPage<Props> = ({ topicId }: Props) => {
 	const { socket, connected, reconnect } = useContext(SocketContext)
 	const { room, chat, status, errors, msg } = useAppSelector((state) => state.topicChat)
 
-	const [count, setCount] = useState<number>(0)
 	const [message, setMessage] = useState<string>('')
 
 	const [modal, setModal] = useState<boolean>(false)
@@ -60,18 +59,18 @@ const TopicFeedRoomPage: NextPage<Props> = ({ topicId }: Props) => {
 		}
 	}, [])
 
-	useEffect(() => {
-		console.log(topicId)
-		API.get(`/topic/dashboard`)
-			.then((res) => {
-				console.log(res.data.data)
-				return setInfo(() => res.data.data.find((topic: { id: string }) => String(topic.id) === topicId))
-			})
-			.catch((error) => {
-				console.error('API 요청 중 오류 발생:', error)
-				throw error
-			})
-	}, [])
+	// useEffect(() => {
+	// 	console.log(topicId)
+	// 	API.get(`/topic/dashboard`)
+	// 		.then((res) => {
+	// 			console.log(res.data.data)
+	// 			return setInfo(() => res.data.data.find((topic: { id: string }) => String(topic.id) === topicId))
+	// 		})
+	// 		.catch((error) => {
+	// 			console.error('API 요청 중 오류 발생:', error)
+	// 			throw error
+	// 		})
+	// }, [])
 
 	//-socket
 	useEffect(() => {
@@ -94,10 +93,10 @@ const TopicFeedRoomPage: NextPage<Props> = ({ topicId }: Props) => {
 	//-message
 	const send = () => {
 		if (!message.length) return
+
 		const body = { topicId, message }
 		socket.emit('send_comment', body)
 	}
-
 	const recv = (data: any) => {
 		if (room?.id === data.roomId || room?.id === data.roomId?.id || topicId === data.topicId) dispatch(TopicChatAction.AddChatOne(data))
 	}
@@ -105,25 +104,6 @@ const TopicFeedRoomPage: NextPage<Props> = ({ topicId }: Props) => {
 	useEffect(() => {
 		if (room?.id) dispatch(TopicChatAction.GetChatList(room?.id || ''))
 	}, [room?.id])
-
-	useEffect(() => {
-		if (room?.current?.duration) {
-			const past_seconds = moment.duration(moment(moment()).diff(room.current.startAt)).asSeconds()
-			setCount(room.current.duration - Math.ceil(past_seconds))
-		}
-	}, [room?.current])
-
-	useEffect(() => {
-		const interval = setInterval(() => {
-			if (count > 0) setCount((prevCount) => prevCount - 1)
-
-			clearInterval(interval)
-		}, 1000)
-
-		return () => {
-			clearInterval(interval)
-		}
-	}, [count])
 
 	return (
 		<Layout
