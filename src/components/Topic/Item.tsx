@@ -13,17 +13,18 @@ const Item = styled.li<{ isHome?: boolean }>`
 	color: #383b40;
 	background: ${(props) => (!props.isHome ? 'white' : '#f2f4f6')};
 	border-radius: 3.2rem;
+	/* 
+	cursor: pointer; */
 
-	cursor: pointer;
-
-	&:hover {
+	/* &:hover {
 		box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.16);
+		scale: 1.1;
 	}
 
 	&:active {
 		box-shadow: none;
 		background: var(--defalut, #e7edfd);
-	}
+	} */
 
 	@media screen and (max-width: 768px) {
 		font-size: 1.4rem;
