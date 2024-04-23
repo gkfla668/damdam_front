@@ -8,6 +8,7 @@ import LargeButton from 'components/Button/Large'
 import TitleText from 'components/common/TitleText'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
 
 const Register = () => {
 	const [identity, setIdentity] = useState('')
@@ -100,12 +101,11 @@ const Register = () => {
 			.then((response) => {
 				console.log(response)
 				if (response.status === 200) {
-					alert('회원가입에 성공하였습니다.')
+					toast('회원가입 성공')
 
 					router.push('/login')
 				} else {
-					alert('회원가입 실패')
-					console.error('회원 가입 실패')
+					toast('회원가입 실패')
 				}
 			})
 			.catch((error) => {
