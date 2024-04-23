@@ -28,14 +28,15 @@ const Login = () => {
 	// const [, setAccCookie] = useCookies(['accessToken'])
 	// const [, setRefCookie] = useCookies(['refreshToken'])
 
-	const { login } = useAuth()
+	const { handleLogin } = useAuth()
 
 	const onSubmit = async () => {
 		const userData = {
 			identity: identity,
 			password: password,
 		}
-		login(userData)
+
+		handleLogin(userData)
 	}
 
 	return (
