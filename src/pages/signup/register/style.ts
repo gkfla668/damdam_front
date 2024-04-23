@@ -28,6 +28,7 @@ export const Input = styled.input`
 	background-color: #f4f6f8;
 	margin-top: 0.8rem;
 	margin-bottom: 0.4rem;
+	font-size: 1.3rem;
 
 	@media screen and (max-width: 768px) {
 		font-size: 1.2rem;
