@@ -7,6 +7,10 @@ const nextConfig = {
 	sassOptions: {
 		includePaths: [path.join(__dirname, 'styles')], // 2. sassOptions 옵션 추가
 	},
+	swcMinify: true,
+	compiler: {
+		styledComponents: true,
+	},
 	// next.js proxy
 	async rewrites() {
 		return [
