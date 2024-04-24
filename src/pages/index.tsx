@@ -38,18 +38,18 @@ const IndexPage: NextPage = () => {
 	return (
 		<Layout>
 			<Box>
-				<LogoSVG />
-				<Title className='mt-5 mb-2 font-extrabold text-center text-main-900 md:text-lg md:leading-9'>
+				{/* <LogoSVG /> */}
+				{/* <Title className='mt-5 mb-2 font-extrabold text-center text-main-900 md:text-lg md:leading-9'>
 					담담은 AI 담비와 함께 학습하고 즐기는 <br />
 					<span className='font-extrabold text-blue md:text-xl'>건강하고 자유로운 토의·토론 </span>
 					플랫폼입니다!
-				</Title>
+				</Title> */}
 				{!isMobile ? <DambiSVG /> : <DambiMSVG />}
 			</Box>
 
 			<div className='flex flex-col items-center justify-center'>
 				<div className='w-[90vw] md:w-[30vw]'>
-					<div className='flex items-center justify-center gap-4 mt-9 mb-7 md:mt-10 md:mb-8'>
+					<div className='flex items-center justify-center gap-4 mt-9 mb-7 md:mt-16 md:mb-8'>
 						{!isMobile ? <HotSVG /> : <HotMSVG />}
 						<div className='font-extrabold'>
 							<span className='text-lg md:text-xl'>오늘의 </span>
@@ -64,7 +64,7 @@ const IndexPage: NextPage = () => {
 						<TopicItem title={"'중대재해법' 근로자 사고 줄일 수 있는가? 🚧"} isHome={true} />
 					</ul>
 
-					<div className='my-[2.4rem] md:my-[3.2rem]'>
+					<div className='my-[2.4rem] md:my-16'>
 						<Link href='/debate/전체'>
 							<LargeButton text={'토론하러 가기'} />
 						</Link>
@@ -85,19 +85,19 @@ const Box = styled.div`
 	justify-content: center;
 	align-items: center;
 
-	padding-top: 3.6rem;
+	padding-top: 2.8rem;
 	border-bottom: 0.1rem solid #e5e8ec;
 `
 
-const Title = styled.div`
-	@keyframes fadeIn {
-		0% {
-			opacity: 0;
-		}
-		100% {
-			opacity: 1;
-		}
-	}
+// const Title = styled.div`
+// 	@keyframes fadeIn {
+// 		0% {
+// 			opacity: 0;
+// 		}
+// 		100% {
+// 			opacity: 1;
+// 		}
+// 	}
 
-	animation: fadeIn 1s ease-in-out;
-`
+// 	animation: fadeIn 1s ease-in-out;
+// `
