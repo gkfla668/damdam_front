@@ -34,9 +34,9 @@ type AuthValuesType = {
 	loading: boolean
 	setLoading: (value: boolean) => void
 	//-function
-	login: (params: LoginParams, errorCallback?: ErrCallbackType) => void
-	register: (params: RegisterParams, errorCallback?: ErrCallbackType) => void
-	logout: () => void
+	handleLogin: (params: LoginParams, errorCallback?: ErrCallbackType) => void
+	handleRegister: (params: RegisterParams, errorCallback?: ErrCallbackType) => void
+	handleLogout: () => void
 }
 
 // ** Defaults
@@ -45,9 +45,9 @@ const defaultProvider: AuthValuesType = {
 	loading: true,
 	setUser: () => null,
 	setLoading: () => Boolean,
-	login: () => Promise.resolve(),
-	register: () => Promise.resolve(),
-	logout: () => Promise.resolve(),
+	handleLogin: () => Promise.resolve(),
+	handleRegister: () => Promise.resolve(),
+	handleLogout: () => Promise.resolve(),
 }
 
 const AuthContext = createContext(defaultProvider)
@@ -153,13 +153,13 @@ const AuthProvider = ({ children }: Props) => {
 				}
 			})
 	}
-
 	const handleLogout = () => {
 		setUser(null)
 		removeToken()
 		removeRefreshToken()
 		window.localStorage.removeItem('userData')
 		router.push('/login')
+		return toast('로그아웃 성공')
 	}
 
 	const values = {
@@ -167,9 +167,9 @@ const AuthProvider = ({ children }: Props) => {
 		loading,
 		setUser,
 		setLoading,
-		login: handleLogin,
-		register: handleRegister,
-		logout: handleLogout,
+		handleLogin: handleLogin,
+		handleRegister: handleRegister,
+		handleLogout: handleLogout,
 	}
 
 	return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>

@@ -8,6 +8,7 @@ import LargeButton from 'components/Button/Large'
 import TitleText from 'components/common/TitleText'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
 
 const Register = () => {
 	const [identity, setIdentity] = useState('')
@@ -86,27 +87,30 @@ const Register = () => {
 		},
 	})
 
-	const onSubmit = async () => {
+	const onSubmit = () => {
 		const userData = {
 			identity: identity,
 			password: password,
 			name: name,
-			birth: birth,
 			sex: sex,
+			birth: birth,
 		}
-		try {
-			const response = await apiInstance.post('/auth/register', JSON.stringify(userData))
-			if (response.status === 200) {
-				alert('회원가입에 성공하였습니다.')
 
-				router.push('/login')
-			} else {
-				alert('회원가입 실패')
-				console.error('회원 가입 실패')
-			}
-		} catch (error) {
-			console.error('API 요청 중 오류 발생:', error)
-		}
+		apiInstance
+			.post('/auth/register', JSON.stringify(userData))
+			.then((response) => {
+				console.log(response)
+				if (response.status === 200) {
+					toast('회원가입 성공')
+
+					router.push('/login')
+				} else {
+					toast('회원가입 실패')
+				}
+			})
+			.catch((error) => {
+				console.error('API 요청 중 오류 발생:', error)
+			})
 	}
 
 	return (
@@ -114,7 +118,7 @@ const Register = () => {
 			<div className='flex flex-col items-center justify-center mt-[44px] md:mt-[88px]'>
 				<div className='w-[320px] md:w-[640px] flex flex-col justify-center items-center'>
 					<TitleText className='mb-[4rem] md:mb-10' title={'회원가입'} />
-					<form className='w-full'>
+					<div className='w-full'>
 						<div>
 							<S.InputWrapper>
 								<S.InputLabel>아이디</S.InputLabel>
@@ -196,9 +200,9 @@ const Register = () => {
 							<p className='font-extrabold md:text-[16px] text-[14px]'>건강한 토의토론 문자를 위해 본인인증 서비스를 실시하고 있습니다.</p>
 						</div> */}
 						<div className='w-full mt-[2.4rem] md:mt-[3.6rem] mb-[2rem] text-[#666666]'>
-							<LargeButton text={'완료'} onClick={() => onSubmit()} />
+							<LargeButton text={'완료'} onClick={onSubmit} />
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</Layout>

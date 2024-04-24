@@ -40,7 +40,7 @@ export default function App({ Component, pageProps }: AppProps) {
 			<LayoutProvider>
 				<SocketProvider>
 					<AuthProvider>
-						<Meta title='담담 - 토론플랫폼	' />
+						<Meta title='담담 - 토론플랫폼' />
 						<Component {...pageProps} />
 						<ToastContainer
 							theme='light'

@@ -29,27 +29,27 @@ const IndexPage: NextPage = () => {
 
 	const [modal, setModal] = useState<boolean>(false)
 
-	const onConfirmLogin = (id: string) => {
-		if (!loggedIn) return setModal(true)
+	// const onConfirmLogin = (id: string) => {
+	// 	if (!loggedIn) return setModal(true)
 
-		router.push(`/topic/room/${id}`)
-	}
+	// 	router.push(`/topic/room/${id}`)
+	// }
 
 	return (
 		<Layout>
 			<Box>
-				<LogoSVG />
-				<div className='mt-5 mb-2 font-extrabold text-center text-main-900 md:text-lg md:leading-9'>
+				{/* <LogoSVG /> */}
+				{/* <Title className='mt-5 mb-2 font-extrabold text-center text-main-900 md:text-lg md:leading-9'>
 					담담은 AI 담비와 함께 학습하고 즐기는 <br />
 					<span className='font-extrabold text-blue md:text-xl'>건강하고 자유로운 토의·토론 </span>
 					플랫폼입니다!
-				</div>
+				</Title> */}
 				{!isMobile ? <DambiSVG /> : <DambiMSVG />}
 			</Box>
 
 			<div className='flex flex-col items-center justify-center'>
 				<div className='w-[90vw] md:w-[30vw]'>
-					<div className='flex items-center justify-center gap-4 mt-9 mb-7 md:mt-10 md:mb-8'>
+					<div className='flex items-center justify-center gap-4 mt-9 mb-7 md:mt-16 md:mb-8'>
 						{!isMobile ? <HotSVG /> : <HotMSVG />}
 						<div className='font-extrabold'>
 							<span className='text-lg md:text-xl'>오늘의 </span>
@@ -57,20 +57,16 @@ const IndexPage: NextPage = () => {
 						</div>
 					</div>
 					<ul className='flex flex-col items-center justify-center w-full gap-4'>
-						<TopicItem title={"'의대 정원 확대', 의료 공백 문제 해결 가능한가? 💉"} onClick={() => onConfirmLogin('2')} isHome={true} />
-						<TopicItem title={"'한국형 제시카법', 대책 마련 절실 vs 위헌 소지 ⚠️"} onClick={() => onConfirmLogin('9')} isHome={true} />
-						<TopicItem title={"'망분리 규제', 완화해야 하는가? 🔐"} onClick={() => onConfirmLogin('1')} isHome={true} />
-						<TopicItem
-							title={"'현금 없는 버스', 편리한 사회 vs 현금 사용 선택권 침해 🚌"}
-							onClick={() => onConfirmLogin('4')}
-							isHome={true}
-						/>
-						<TopicItem title={"'중대재해법' 근로자 사고 줄일 수 있는가? 🚧"} onClick={() => onConfirmLogin('10')} isHome={true} />
+						<TopicItem title={"'의대 정원 확대', 의료 공백 문제 해결 가능한가? 💉"} isHome={true} />
+						<TopicItem title={"'한국형 제시카법', 대책 마련 절실 vs 위헌 소지 ⚠️"} isHome={true} />
+						<TopicItem title={"'망분리 규제', 완화해야 하는가? 🔐"} isHome={true} />
+						<TopicItem title={"'현금 없는 버스', 편리한 사회 vs 현금 사용 선택권 침해 🚌"} isHome={true} />
+						<TopicItem title={"'중대재해법' 근로자 사고 줄일 수 있는가? 🚧"} isHome={true} />
 					</ul>
 
-					<div className='my-[2.4rem] md:my-[3.2rem]'>
-						<Link href='/topic'>
-							<LargeButton text={'토픽 더보기'} />
+					<div className='my-[2.4rem] md:my-16'>
+						<Link href='/debate/전체'>
+							<LargeButton text={'토론하러 가기'} />
 						</Link>
 					</div>
 				</div>
@@ -89,6 +85,19 @@ const Box = styled.div`
 	justify-content: center;
 	align-items: center;
 
-	padding-top: 3.6rem;
+	padding-top: 2.8rem;
 	border-bottom: 0.1rem solid #e5e8ec;
 `
+
+// const Title = styled.div`
+// 	@keyframes fadeIn {
+// 		0% {
+// 			opacity: 0;
+// 		}
+// 		100% {
+// 			opacity: 1;
+// 		}
+// 	}
+
+// 	animation: fadeIn 1s ease-in-out;
+// `

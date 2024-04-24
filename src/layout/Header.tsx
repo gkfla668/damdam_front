@@ -33,15 +33,13 @@ export default function Header() {
 	const [iconModal, setIconModal] = useState(false)
 
 	const onConfirmLogin = () => {
-		if (!loggedIn) return setLoginModal(true)
-
-		router.push('/study')
+		return toast.error('준비 중입니다...')
 	}
 
-	const { logout } = useAuth()
-	const handleLogout = () => {
-		logout()
-		return toast('로그아웃 성공')
+	const { handleLogout } = useAuth()
+
+	const onLogout = () => {
+		handleLogout()
 	}
 
 	return (
@@ -63,7 +61,7 @@ export default function Header() {
 								</>
 							)}
 						</div>
-						<Link href='/topic' className='relative'>
+						<div onClick={() => toast.error('준비 중입니다...')} className='relative cursor-pointer'>
 							<MenuItem className={`${curPath.includes('/topic') ? 'text-blue' : 'text-[#383b40]'}`}>토픽</MenuItem>
 							{curPath.includes('/topic') && (
 								<>
@@ -71,7 +69,8 @@ export default function Header() {
 									<NavPointSVG width={10} height={9} className='absolute top-0 -right-4' />
 								</>
 							)}
-						</Link>
+						</div>
+
 						<Link href='/debate' className='relative'>
 							<MenuItem className={`${curPath.includes('/debate') ? 'text-blue' : 'text-[#383b40]'}`}>토론</MenuItem>
 							{curPath.includes('/debate') && (
@@ -138,7 +137,7 @@ export default function Header() {
 									<span className='block w-full py-4 text-sm font-extrabold text-blue'>로그인</span>
 								</Link>
 							) : (
-								<div onClick={handleLogout}>
+								<div onClick={onLogout}>
 									<span className='block w-full py-4 text-sm font-extrabold text-main-900'>로그아웃</span>
 								</div>
 							)}
@@ -161,7 +160,8 @@ const MenuItem = styled.span`
 const Bubble = styled.button`
 	position: absolute;
 	right: 5rem;
-	border: 1px solid #324478;
+	border: 1.6px solid #324478;
+	color: #324478;
 	margin-top: 0.4rem;
 	border-radius: 0.8em;
 
@@ -169,4 +169,15 @@ const Bubble = styled.button`
 	white-space: nowrap;
 	font-size: 1.2rem;
 	font-weight: 800;
+
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+
+	animation: fadeIn 1s ease-in-out;
 `
